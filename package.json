@@ -1,0 +1,52 @@
+{
+  "name": "advance-request-and-refound",
+  "version": "1.0.0",
+  "description": "project to control request and refound",
+  "main": "./src/index.js",
+  "scripts": {
+    "start:dev": "npm-run-all wp-build:dev --parallel wp-serve wp-watch",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "wp-build:prod": "webpack -c ./webpack.prod.js",
+    "wp-build:dev": "webpack -c ./webpack.dev.js",
+    "wp-watch": "webpack -c ./webpack.dev.js -w",
+    "wp-serve": "webpack serve -c ./webpack.dev.js",
+    "eslint": "eslint ./src/**.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Evando16/advance-request-and-refound.git"
+  },
+  "author": "Evando Junior",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Evando16/advance-request-and-refound/issues"
+  },
+  "homepage": "https://github.com/Evando16/advance-request-and-refound#readme",
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-styled-components": "^1.12.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "eslint": "^5.16.0 || ^6.8.0 || ^7.2.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4 || ^3 || ^2.3.0 || ^1.7.0",
+    "html-webpack-plugin": "^4.5.1",
+    "npm-run-all": "^4.1.5",
+    "webpack": "^5.17.0",
+    "webpack-cli": "^4.4.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
+  }
+}
