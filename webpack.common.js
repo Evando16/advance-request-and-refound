@@ -23,7 +23,7 @@ module.exports = {
       hash: true,
       inject: false,
       title: 'Request & Refound',
-      template: './index.html',
+      template: './src/index.html',
     }),
     new CleanWebpackPlugin(),
   ],

@@ -12,7 +12,6 @@ const HelloWorldText = styled.div`
 `;
 
 export default function HelloWorld({ title }) {
-  console.log(title);
   return (
     <HelloWorldText>
       <span>{title}</span>
