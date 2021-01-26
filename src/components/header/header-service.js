@@ -1,32 +1,37 @@
 import axios from 'axios';
 import { HEADER_API_ROUTE } from '../../shared/constants';
+import parseDate from '../../utils/date';
 
-function parseBreakfastFlag(flag) {
+const DATA_TYPE = {
+  REFUND: 'Reembolso',
+};
+
+const PURPOSE_TYPE = {
+  FRATERNIZATION: 'Confraternização',
+};
+
+export function parseBreakfastFlag(flag) {
   return flag ? 'Sim' : 'Não';
-}
-
-function pardeDate(date) {
-  return new Date(date).toLocaleString('br', { year: 'numeric', month: 'numeric', day: 'numeric' });
 }
 
 function parseHttpResponse(data) {
   return {
     id: data.id,
-    type: data.type,
+    type: DATA_TYPE[data.type],
     collaborator: {
       id: data.collaborator.id,
       name: data.collaborator.name,
       email: data.collaborator.email,
     },
     justification: data.justification,
-    purpose: data.purpose,
+    purpose: PURPOSE_TYPE[data.purpose],
     project: {
       id: data.project.id,
       title: data.project.title,
     },
     accountabilityExtraInfo: {
       budgetForBreakfast: parseBreakfastFlag(data.accountabilityExtraInfo.budgetForBreakfast),
-      eventDate: pardeDate(data.accountabilityExtraInfo.eventDate),
+      eventDate: parseDate(data.accountabilityExtraInfo.eventDate),
       amountOfPeople: data.accountabilityExtraInfo.amountOfPeople,
     },
     analyst: data.analyst,

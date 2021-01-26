@@ -30,7 +30,7 @@ export default function Header() {
   }, []);
 
   if (!headerData) {
-    return null;
+    return 'Loading...';
   }
 
   return (
