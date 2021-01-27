@@ -29,6 +29,7 @@ export default function Header() {
     getHeaderData();
   }, []);
 
+  // remove this and use improve
   if (!headerData) {
     return 'Loading...';
   }

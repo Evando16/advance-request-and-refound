@@ -49,24 +49,25 @@ afterEach(() => {
   container = null;
 });
 
-it('should render loading while requesting header data', async () => {
-  requestHeaderData.mockImplementation(() => Promise.resolve(null));
+describe('Unit tests', () => {
+  it('should render loading while requesting header data', async () => {
+    requestHeaderData.mockImplementation(() => Promise.resolve(null));
 
-  await act(async () => {
-    render(<Header />, container);
+    await act(async () => {
+      render(<Header />, container);
+    });
+
+    expect(container.textContent).toEqual('Loading...');
   });
 
-  expect(container.textContent).toEqual('Loading...');
-});
+  it('should render header', async () => {
+    requestHeaderData.mockImplementation(() => Promise.resolve(headerDataMock));
 
-it('should render header', async () => {
-  requestHeaderData.mockImplementation(() => Promise.resolve(headerDataMock));
+    await act(async () => {
+      render(<Header />, container);
+    });
 
-  await act(async () => {
-    render(<Header />, container);
-  });
-
-  expect(pretty(container.innerHTML)).toMatchInlineSnapshot(`
+    expect(pretty(container.innerHTML)).toMatchInlineSnapshot(`
     "<div class=\\"MuiPaper-root MuiCard-root makeStyles-cardContainier-4 MuiPaper-elevation1 MuiPaper-rounded\\">
       <div><span>Reembolso</span><span>#756</span><span>f</span></div>
       <div class=\\"makeStyles-cardContent-5\\">
@@ -89,4 +90,5 @@ it('should render header', async () => {
       </div>
     </div>"
   `);
+  });
 });

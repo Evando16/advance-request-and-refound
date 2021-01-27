@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import requestHeaderData, { parseBreakfastFlag } from './header-service';
 
-const headerDataMock = {
+const headerDataHttpMock = {
   id: 756,
   createdOn: 1588613238775,
   title: '-----teste',
@@ -65,7 +65,7 @@ jest.mock('axios');
 
 describe('Unit tests', () => {
   it('should request header data', async () => {
-    axios.get.mockResolvedValue({ data: headerDataMock });
+    axios.get.mockResolvedValue({ data: headerDataHttpMock });
 
     const result = await requestHeaderData();
 
