@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { HEADER_API_ROUTE } from '../../shared/constants';
+import { HEADER_API_ROUTE } from '../../shared/api-constants';
 import parseDate from '../../utils/date';
 
 const DATA_TYPE = {

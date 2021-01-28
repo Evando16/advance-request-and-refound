@@ -1,12 +1,8 @@
 import React from 'react';
-import Header from './components/header/header';
-import Timeline from './components/timeline/timeline';
+import Solicitation from './pages/solicitation';
 
 export default function App() {
   return (
-    <>
-      <Header />
-      <Timeline />
-    </>
+    <Solicitation />
   );
 }

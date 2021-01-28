@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { TIMELINE_API_ROUTE } from '../../shared/constants';
+import { TIMELINE_API_ROUTE } from '../../shared/api-constants';
 import formatCurrency from '../../utils/currency';
 import parseDate from '../../utils/date';
 
