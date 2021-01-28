@@ -17,8 +17,7 @@ import ptBrLocale from 'date-fns/locale/pt-BR';
 import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { Help as HelpIcon } from '@material-ui/icons';
 import saveExpense from './new-expense-service';
 
 const CURRENCY_OPTIONS = [
@@ -53,7 +52,7 @@ NumberFormatCustom.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export default function NewExpense() {
+export default function NewExpense({ toggleVision, setSnackbar }) {
   const [expense, setExpense] = useState({
     expenseType: '',
     currency: '',
@@ -123,13 +122,14 @@ export default function NewExpense() {
 
   function saveNewExpense() {
     if (isFormValid) {
-      // call back end
       saveExpense(expense)
-        .then((data) => {
-          console.log('sucesso', data);
+        .then(() => {
+          setSnackbar({ open: true, message: 'Despesa salva com sucesso :)', type: 'sucess' });
+          toggleVision();
         })
-        .catch((error) => {
-          console.log('error', error);
+        .catch(() => {
+          // LOG ERROR IN SOME API
+          setSnackbar({ open: true, message: 'Ops... Um erro aconteceu na hora de salvar sua despesa :(', type: 'error' });
         });
     }
   }
@@ -145,7 +145,7 @@ export default function NewExpense() {
             <div>
               <div>
                 <span>Recibo, cupom ou nota fiscal*</span>
-                <FontAwesomeIcon icon={faQuestionCircle} />
+                <HelpIcon fontSize="small" />
               </div>
               <label htmlFor="contained-button-file">
                 <Button variant="outlined" color="primary" component="span" style={{ borderStyle: 'dashed' }}>
@@ -154,7 +154,6 @@ export default function NewExpense() {
                 <input
                   id="contained-button-file"
                   style={{ display: 'none' }}
-                  // value={image}
                   onChange={onChangeReceiptImage}
                   accept=".jpg,.png"
                   type="file"
@@ -249,7 +248,7 @@ export default function NewExpense() {
         <CardActions>
           <Grid container justify="flex-end" spacing={2}>
             <Grid item>
-              <Button variant="outlined" color="primary">
+              <Button variant="outlined" color="primary" onClick={toggleVision}>
                 Cancelar
               </Button>
             </Grid>
@@ -264,3 +263,8 @@ export default function NewExpense() {
     </Card>
   );
 }
+
+NewExpense.propTypes = {
+  toggleVision: PropTypes.func.isRequired,
+  setSnackbar: PropTypes.func.isRequired,
+};
