@@ -3,8 +3,9 @@ import {
   Snackbar,
   IconButton,
 } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export default function CustomSnackbar({
   open, message, type, setSnackbar,
@@ -30,7 +31,7 @@ export default function CustomSnackbar({
       message={message}
       action={(
         <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-          <CloseIcon fontSize="small" />
+          <FontAwesomeIcon icon={faTimes} />
         </IconButton>
       )}
     />

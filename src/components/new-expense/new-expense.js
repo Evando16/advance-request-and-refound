@@ -16,8 +16,9 @@ import DateFnsUtils from '@date-io/date-fns';
 import ptBrLocale from 'date-fns/locale/pt-BR';
 import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
-import { Help as HelpIcon } from '@material-ui/icons';
 import saveExpense from './new-expense-service';
 
 const CURRENCY_OPTIONS = [
@@ -151,7 +152,7 @@ export default function NewExpense({ toggleVision, setSnackbar }) {
             <div>
               <div>
                 <span>Recibo, cupom ou nota fiscal*</span>
-                <HelpIcon fontSize="small" />
+                <FontAwesomeIcon icon={faQuestionCircle} />
               </div>
               <label htmlFor="contained-button-file">
                 <Button variant="outlined" color="primary" component="span" style={{ borderStyle: 'dashed' }}>

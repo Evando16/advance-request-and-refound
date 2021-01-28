@@ -1,32 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  Group as GroupIcon,
-  Flare as FlareIcon,
-  RoomService as RoomServiceIcon,
-  Receipt as ReceiptIcon,
-} from '@material-ui/icons';
-import PropTypes from 'prop-types';
+  faUsers, faAsterisk, faConciergeBell, faReceipt,
+} from '@fortawesome/free-solid-svg-icons';
 
 import requestTimelineData from './timeline-service';
 
-function CardIcon({ type }) {
-  switch (type) {
+function getCardIcon(cardType) {
+  switch (cardType) {
     case 'EVALUATION':
-      return <GroupIcon fontSize="small" />;
+      return faUsers;
     case 'ACCOUNTABILITY_SUBMITTED':
     case 'ACCOUNTABILITY_CREATED':
-      return <FlareIcon fontSize="small" />;
+      return faAsterisk;
     case 'EXPENSE':
-      return <RoomServiceIcon fontSize="small" />;
+      return faConciergeBell;
     default:
       return null;
   }
 }
-
-CardIcon.propTypes = {
-  type: PropTypes.string.isRequired,
-};
 
 export default function Timeline() {
   const [timelineData, setTimelineData] = useState([]);
@@ -49,7 +42,7 @@ export default function Timeline() {
     timelineData.map((item) => (
       <Card key={item.id} style={{ marginTop: '24px', padding: '16px' }}>
         <div>
-          <CardIcon type={item.cardType} />
+          <FontAwesomeIcon icon={getCardIcon(item.cardType)} />
           <span>{item.cardDate}</span>
         </div>
         <div>
@@ -75,7 +68,7 @@ export default function Timeline() {
         {item.resourceUrl && (
           <div>
             <Button>
-              <ReceiptIcon fontSize="small" />
+              <FontAwesomeIcon icon={faReceipt} />
               Ver nota fiscal
             </Button>
           </div>
