@@ -7,67 +7,67 @@ import requestHeaderData from './header-service';
 import Header from './header';
 
 jest.mock('./header-service');
-
-const headerDataMock = {
-  accountabilityExtraInfo: {
-    amountOfPeople: 1,
-    budgetForBreakfast: 'Não',
-    eventDate: '14/05/2020',
-  },
-  analyst: null,
-  collaborator: {
-    email: 'quickops-bs@hotmart.com',
-    id: 10436247,
-    name: 'Quickops BS',
-  },
-  costCenters: [
-    {
-      id: 88,
-      name: '01 - Sem manager',
+describe('HeaderComponent', () => {
+  const headerDataMock = {
+    accountabilityExtraInfo: {
+      amountOfPeople: 1,
+      budgetForBreakfast: 'Não',
+      eventDate: '14/05/2020',
     },
-  ],
-  id: 756,
-  justification: 'f',
-  project: {
-    id: 41,
-    title: 'Afiliados Brasil',
-  },
-  purpose: 'Confraternização',
-  type: 'Reembolso',
-};
+    analyst: null,
+    collaborator: {
+      email: 'quickops-bs@hotmart.com',
+      id: 10436247,
+      name: 'Quickops BS',
+    },
+    costCenters: [
+      {
+        id: 88,
+        name: '01 - Sem manager',
+      },
+    ],
+    id: 756,
+    justification: 'f',
+    project: {
+      id: 41,
+      title: 'Afiliados Brasil',
+    },
+    purpose: 'Confraternização',
+    type: 'Reembolso',
+  };
 
-let container = null;
+  let container = null;
 
-beforeEach(() => {
-  container = document.createElement('div');
-  document.body.append(container);
-});
-
-afterEach(() => {
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
-
-describe('Unit tests', () => {
-  it('should render loading while requesting header data', async () => {
-    requestHeaderData.mockImplementation(() => Promise.resolve(null));
-
-    await act(async () => {
-      render(<Header />, container);
-    });
-
-    expect(container.textContent).toEqual('Loading...');
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.append(container);
   });
 
-  it('should render header', async () => {
-    requestHeaderData.mockImplementation(() => Promise.resolve(headerDataMock));
+  afterEach(() => {
+    unmountComponentAtNode(container);
+    container.remove();
+    container = null;
+  });
 
-    await act(async () => {
-      render(<Header />, container);
+  describe('Unit tests', () => {
+    it('should render loading while requesting header data', async () => {
+      requestHeaderData.mockImplementation(() => Promise.resolve(null));
+
+      await act(async () => {
+        render(<Header />, container);
+      });
+
+      expect(container.textContent).toEqual('Loading...');
     });
 
-    expect(pretty(container.innerHTML)).toMatchInlineSnapshot(`
+    it('should render header', async () => {
+      requestHeaderData.mockImplementation(() => Promise.resolve(headerDataMock));
+
+      await act(async () => {
+        render(<Header />, container);
+      });
+
+      expect(pretty(container.innerHTML)).toMatchInlineSnapshot(`
     "<div class=\\"MuiPaper-root MuiCard-root makeStyles-cardContainier-4 MuiPaper-elevation1 MuiPaper-rounded\\">
       <div><span>Reembolso</span><span>#756</span><span>f</span></div>
       <div class=\\"makeStyles-cardContent-5\\">
@@ -90,5 +90,6 @@ describe('Unit tests', () => {
       </div>
     </div>"
   `);
+    });
   });
 });

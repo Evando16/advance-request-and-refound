@@ -13,8 +13,8 @@ export default function saveExpense({
   const expense = {
     expenseTypeCode: expenseType,
     currencyCode: currency,
-    amountSpent: valueToBePaid,
-    amountTotal: receiptValue,
+    amountSpent: Number(valueToBePaid),
+    amountTotal: Number(receiptValue),
     notes: description,
     resourceUrl: receiptImage.file,
     cardDate: receiptDate.getTime(),

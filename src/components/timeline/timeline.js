@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 import requestTimelineData from './timeline-service';
 
-export function CardIcon({ type }) {
+function CardIcon({ type }) {
   switch (type) {
     case 'EVALUATION':
       return <GroupIcon fontSize="small" />;

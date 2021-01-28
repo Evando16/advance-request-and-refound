@@ -4,13 +4,13 @@
   "description": "project to control request and refound",
   "main": "./src/index.js",
   "scripts": {
-    "start": "npm-run-all wp-build:dev --parallel wp-serve wp-watch",
+    "start": "npm-run-all build:dev --parallel serve build-watch",
     "test": "jest",
-    "test-coverage": "jest --coverage --watch",
-    "wp-build:prod": "webpack -c ./webpack.prod.js",
-    "wp-build:dev": "webpack -c ./webpack.dev.js",
-    "wp-watch": "webpack -c ./webpack.dev.js -w",
-    "wp-serve": "webpack serve -c ./webpack.dev.js",
+    "test-coverage": "jest --coverage --watchAll",
+    "build:prod": "webpack -c ./webpack.prod.js",
+    "build:dev": "webpack -c ./webpack.dev.js",
+    "build-watch": "webpack -c ./webpack.dev.js -w",
+    "serve": "webpack serve -c ./webpack.dev.js",
     "lint": "eslint ./src/**/**.js && stylelint ./src/**/**.js"
   },
   "repository": {

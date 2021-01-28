@@ -26,6 +26,12 @@ const CURRENCY_OPTIONS = [
   { value: 'MXN', description: 'MXN' },
 ];
 
+const EXPENSE_TYPE_OPTIONS = [
+  { value: 'hotel-fee', description: 'Hotel' },
+  { value: 'food', description: 'Alimentação' },
+  { value: 'transport', description: 'Transporte' },
+];
+
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...others } = props;
   return (
@@ -173,9 +179,9 @@ export default function NewExpense({ toggleVision, setSnackbar }) {
                     value={expense.expenseType}
                     onChange={onChangeExpenseType}
                   >
-                    <MenuItem value="hotel-fee">Hotel</MenuItem>
-                    <MenuItem value="food">Alimentação</MenuItem>
-                    <MenuItem value="transport">Transporte</MenuItem>
+                    {EXPENSE_TYPE_OPTIONS.map((item) => (
+                      <MenuItem key={item.value} value={item.value}>{item.description}</MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
                 <TextField

@@ -53,21 +53,22 @@ const expectedTimelineData = [
 ];
 
 jest.mock('axios');
+describe('TimelineService', () => {
+  describe('Unit tests', () => {
+    it('should request timeline data', async () => {
+      axios.get.mockResolvedValue({ data: timelineDataHttpMock });
 
-describe('Unit tests', () => {
-  it('should request timeline data', async () => {
-    axios.get.mockResolvedValue({ data: timelineDataHttpMock });
+      const result = await requestTimelineData();
 
-    const result = await requestTimelineData();
+      expect(result).toEqual(expectedTimelineData);
+    });
 
-    expect(result).toEqual(expectedTimelineData);
-  });
+    it('should return empty array when file to get timeline data', async () => {
+      axios.get.mockResolvedValue({ data: null });
 
-  it('should return empty array when file to get timeline data', async () => {
-    axios.get.mockResolvedValue({ data: null });
+      const result = await requestTimelineData();
 
-    const result = await requestTimelineData();
-
-    expect(result).toEqual([]);
+      expect(result).toEqual([]);
+    });
   });
 });
