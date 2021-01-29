@@ -167,8 +167,6 @@ export default function NewExpense({ toggleVision, setSnackbar }) {
                 />
               </label>
               <span>A imagem deve estar no formato JPG ou PNG.</span>
-              {expense.receiptImage.file
-                && <span>{JSON.stringify(expense.receiptImage.file)}</span>}
             </div>
             <div>
               <div style={{ display: 'flex', flexDirection: 'column' }}>

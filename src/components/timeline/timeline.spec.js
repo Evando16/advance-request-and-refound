@@ -2,8 +2,11 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { render, unmountComponentAtNode } from 'react-dom';
 import pretty from 'pretty';
-import Timeline from './timeline';
+import {
+  faUsers, faAsterisk, faConciergeBell,
+} from '@fortawesome/free-solid-svg-icons';
 
+import Timeline, { getCardIcon } from './timeline';
 import requestTimelineData from './timeline-service';
 
 const timelineDataMock = [
@@ -32,40 +35,40 @@ const timelineDataMock = [
 ];
 
 jest.mock('./timeline-service');
-let container = null;
-
-beforeEach(() => {
-  container = document.createElement('div');
-  document.body.append(container);
-});
-
-afterEach(() => {
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
-
 describe('TimelineComponent', () => {
+  let container = null;
+
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.append(container);
+  });
+
+  afterEach(() => {
+    unmountComponentAtNode(container);
+    container.remove();
+    container = null;
+  });
+
   describe('Unit tests', () => {
-    // it('should get icon to EVALUATION card', () => {
-    //   expect(getCardIcon('EVALUATION')).toEqual(faUsers);
-    // });
+    it('should get icon to EVALUATION card', () => {
+      expect(getCardIcon('EVALUATION')).toEqual(faUsers);
+    });
 
-    // it('should get icon to ACCOUNTABILITY_SUBMITTED card', () => {
-    //   expect(getCardIcon('ACCOUNTABILITY_SUBMITTED')).toEqual(faAsterisk);
-    // });
+    it('should get icon to ACCOUNTABILITY_SUBMITTED card', () => {
+      expect(getCardIcon('ACCOUNTABILITY_SUBMITTED')).toEqual(faAsterisk);
+    });
 
-    // it('should get icon to ACCOUNTABILITY_CREATED card', () => {
-    //   expect(getCardIcon('ACCOUNTABILITY_CREATED')).toEqual(faAsterisk);
-    // });
+    it('should get icon to ACCOUNTABILITY_CREATED card', () => {
+      expect(getCardIcon('ACCOUNTABILITY_CREATED')).toEqual(faAsterisk);
+    });
 
-    // it('should get icon to EXPENSE card', () => {
-    //   expect(getCardIcon('EXPENSE')).toEqual(faConciergeBell);
-    // });
+    it('should get icon to EXPENSE card', () => {
+      expect(getCardIcon('EXPENSE')).toEqual(faConciergeBell);
+    });
 
-    // it('should get null icon to ivalid card type', () => {
-    //   expect(getCardIcon('invalid')).toEqual(null);
-    // });
+    it('should get null icon to ivalid card type', () => {
+      expect(getCardIcon('invalid')).toEqual(null);
+    });
 
     it('should render no result while requesting timeline data', async () => {
       requestTimelineData.mockImplementation(() => Promise.resolve([]));

@@ -7,9 +7,8 @@ const CODES = {
 };
 
 export default function formatCurrency(currencyValue, currencyCode) {
-  if (currencyValue !== 0
-    && (!currencyValue || Number.isNaN(Number(currencyValue)) || !currencyCode)) {
-    return null;
+  if (!currencyValue || Number.isNaN(Number(currencyValue)) || !currencyCode) {
+    return '0';
   }
 
   return new Intl.NumberFormat(CODES[currencyCode]).format(currencyValue);

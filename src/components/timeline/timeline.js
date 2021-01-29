@@ -7,7 +7,7 @@ import {
 
 import requestTimelineData from './timeline-service';
 
-function getCardIcon(cardType) {
+export function getCardIcon(cardType) {
   switch (cardType) {
     case 'EVALUATION':
       return faUsers;
