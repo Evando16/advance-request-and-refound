@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Header from '../components/header/header';
 import Timeline from '../components/timeline/timeline';
 import NewExpense from '../components/new-expense/new-expense';
+import Sidebar from '../components/sidebar/sidebar';
 
 export default function Solicitation({ setSnackbar }) {
   const [showNewExpense, setNewExpense] = useState(false);
@@ -24,6 +25,7 @@ export default function Solicitation({ setSnackbar }) {
       </Button>
       {showNewExpense && <NewExpense toggleVision={toggleNewExpense} setSnackbar={setSnackbar} />}
       <Timeline />
+      <Sidebar />
     </>
   );
 }
