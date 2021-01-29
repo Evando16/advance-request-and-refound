@@ -12,7 +12,7 @@ describe('HeaderComponent', () => {
     accountabilityExtraInfo: {
       amountOfPeople: 1,
       budgetForBreakfast: 'Não',
-      eventDate: '14/05/2020',
+      eventDate: '05/14/2020',
     },
     analyst: null,
     collaborator: {
@@ -77,7 +77,7 @@ describe('HeaderComponent', () => {
           <div><span>Justificativa</span><span>f</span></div>
           <div><span>Finalidade</span><span>Confraternização</span></div>
           <div><span>Projeto</span><span></span></div>
-          <div><span>Data</span><span>14/05/2020</span></div>
+          <div><span>Data</span><span>05/14/2020</span></div>
           <div><span>Quantidade</span><span>1</span></div>
           <div><span>Inclui café da manhã</span><span>Não</span></div>
         </div>

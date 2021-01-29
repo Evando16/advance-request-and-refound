@@ -40,7 +40,7 @@ describe('HeaderService', () => {
     accountabilityExtraInfo: {
       amountOfPeople: 1,
       budgetForBreakfast: 'Não',
-      eventDate: '14/05/2020',
+      eventDate: '05/14/2020',
     },
     analyst: null,
     collaborator: {

@@ -9,10 +9,10 @@ import requestTimelineData from './timeline-service';
 const timelineDataMock = [
   {
     id: 545,
-    cardDate: '01/04/2020',
+    cardDate: '04/01/2020',
     cardType: 'EXPENSE',
     expenseId: 545,
-    invoiceDate: '01/04/2020',
+    invoiceDate: '04/01/2020',
     expenseTypeId: 5,
     expenseTypeCode: 'hotel-fee',
     expenseTypeIcon: 'concierge-bell',
@@ -87,16 +87,16 @@ describe('TimelineComponent', () => {
       });
 
       expect(pretty(container.innerHTML)).toMatchInlineSnapshot(`
-      "<div class=\\"MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded\\" style=\\"margin-top: 24px; padding: 16px;\\">
-        <div><svg class=\\"MuiSvgIcon-root MuiSvgIcon-fontSizeSmall\\" focusable=\\"false\\" viewBox=\\"0 0 24 24\\" aria-hidden=\\"true\\">
-            <path d=\\"M2 17h20v2H2zm11.84-9.21c.1-.24.16-.51.16-.79 0-1.1-.9-2-2-2s-2 .9-2 2c0 .28.06.55.16.79C6.25 8.6 3.27 11.93 3 16h18c-.27-4.07-3.25-7.4-7.16-8.21z\\"></path>
-          </svg><span>01/04/2020</span></div>
-        <div><span>TIPO</span><span>Aprovação da Solicitação Henrique Elias</span></div>
-        <div><span>VALOR</span><span>11.11</span><span>222.22</span></div>
-        <div><span>STATUS</span><span>PENDING</span><span>sadasd</span></div>
-        <div><button class=\\"MuiButtonBase-root MuiButton-root MuiButton-text\\" tabindex=\\"0\\" type=\\"button\\"><span class=\\"MuiButton-label\\"><svg class=\\"MuiSvgIcon-root MuiSvgIcon-fontSizeSmall\\" focusable=\\"false\\" viewBox=\\"0 0 24 24\\" aria-hidden=\\"true\\"><path d=\\"M18 17H6v-2h12v2zm0-4H6v-2h12v2zm0-4H6V7h12v2zM3 22l1.5-1.5L6 22l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22V2l-1.5 1.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2 7.5 3.5 6 2 4.5 3.5 3 2v20z\\"></path></svg>Ver nota fiscal</span><span class=\\"MuiTouchRipple-root\\"></span></button></div>
-      </div>"
-    `);
+        "<div class=\\"MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded\\" style=\\"margin-top: 24px; padding: 16px;\\">
+          <div><svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"concierge-bell\\" class=\\"svg-inline--fa fa-concierge-bell fa-w-16 \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\">
+              <path fill=\\"currentColor\\" d=\\"M288 130.54V112h16c8.84 0 16-7.16 16-16V80c0-8.84-7.16-16-16-16h-96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h16v18.54C115.49 146.11 32 239.18 32 352h448c0-112.82-83.49-205.89-192-221.46zM496 384H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h480c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z\\"></path>
+            </svg><span>04/01/2020</span></div>
+          <div><span>TIPO</span><span>Aprovação da Solicitação Henrique Elias</span></div>
+          <div><span>VALOR</span><span>11.11</span><span>222.22</span></div>
+          <div><span>STATUS</span><span>PENDING</span><span>sadasd</span></div>
+          <div><button class=\\"MuiButtonBase-root MuiButton-root MuiButton-text\\" tabindex=\\"0\\" type=\\"button\\"><span class=\\"MuiButton-label\\"><svg aria-hidden=\\"true\\" focusable=\\"false\\" data-prefix=\\"fas\\" data-icon=\\"receipt\\" class=\\"svg-inline--fa fa-receipt fa-w-12 \\" role=\\"img\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 384 512\\"><path fill=\\"currentColor\\" d=\\"M358.4 3.2L320 48 265.6 3.2a15.9 15.9 0 0 0-19.2 0L192 48 137.6 3.2a15.9 15.9 0 0 0-19.2 0L64 48 25.6 3.2C15-4.7 0 2.8 0 16v480c0 13.2 15 20.7 25.6 12.8L64 464l54.4 44.8a15.9 15.9 0 0 0 19.2 0L192 464l54.4 44.8a15.9 15.9 0 0 0 19.2 0L320 464l38.4 44.8c10.5 7.9 25.6.4 25.6-12.8V16c0-13.2-15-20.7-25.6-12.8zM320 360c0 4.4-3.6 8-8 8H72c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h240c4.4 0 8 3.6 8 8v16zm0-96c0 4.4-3.6 8-8 8H72c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h240c4.4 0 8 3.6 8 8v16zm0-96c0 4.4-3.6 8-8 8H72c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h240c4.4 0 8 3.6 8 8v16z\\"></path></svg>Ver nota fiscal</span><span class=\\"MuiTouchRipple-root\\"></span></button></div>
+        </div>"
+      `);
     });
   });
 });

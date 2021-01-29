@@ -31,10 +31,10 @@ const timelineDataHttpMock = {
 const expectedTimelineData = [
   {
     id: 545,
-    cardDate: '01/04/2020',
+    cardDate: '04/01/2020',
     cardType: 'EXPENSE',
     expenseId: 545,
-    invoiceDate: '01/04/2020',
+    invoiceDate: '04/01/2020',
     expenseTypeId: 5,
     expenseTypeCode: 'hotel-fee',
     expenseTypeIcon: 'concierge-bell',
