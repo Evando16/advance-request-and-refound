@@ -1,21 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Button } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faUsers, faAsterisk, faConciergeBell, faReceipt,
+  faUsers, faAsterisk, faConciergeBell, faReceipt, faUtensils,
 } from '@fortawesome/free-solid-svg-icons';
 
 import requestTimelineData from './timeline-service';
 
-export function getCardIcon(cardType) {
-  switch (cardType) {
+function getExpenseIcon(timeLineItem) {
+  switch (timeLineItem.expenseTypeIcon) {
+    case 'utensils':
+      return faUtensils;
+    case 'concierge-bell':
+      return faConciergeBell;
+    default:
+      return null;
+  }
+}
+
+export function getCardIcon(timeLineItem) {
+  switch (timeLineItem.cardType) {
     case 'EVALUATION':
       return faUsers;
     case 'ACCOUNTABILITY_SUBMITTED':
     case 'ACCOUNTABILITY_CREATED':
       return faAsterisk;
     case 'EXPENSE':
-      return faConciergeBell;
+      return getExpenseIcon(timeLineItem);
     default:
       return null;
   }
@@ -37,19 +48,18 @@ export default function Timeline() {
     return 'No timeline content =(';
   }
 
-  // need some answers about layout and API to finish the elements logic and layout
   return (
     timelineData.map((item) => (
       <Card key={item.id} style={{ marginTop: '24px', padding: '16px' }}>
         <div>
-          <FontAwesomeIcon icon={getCardIcon(item.cardType)} />
+          <FontAwesomeIcon icon={getCardIcon(item)} />
           <span>{item.cardDate}</span>
         </div>
         <div>
-          <span>TIPO</span>
-          <span>Aprovação da Solicitação Henrique Elias</span>
+          <span>TYPE</span>
+          <span>{item.typeDescription}</span>
         </div>
-        {!!item.amountSpent && item.amountTotal
+        {item.amountSpent !== '0' && item.amountTotal !== '0'
           && (
             <div>
               <span>VALOR</span>
@@ -67,10 +77,8 @@ export default function Timeline() {
           )}
         {item.resourceUrl && (
           <div>
-            <Button>
-              <FontAwesomeIcon icon={faReceipt} />
-              Ver nota fiscal
-            </Button>
+            <FontAwesomeIcon icon={faReceipt} />
+            <a href={item.resourceUrl}>Receipt</a>
           </div>
         )}
       </Card>
