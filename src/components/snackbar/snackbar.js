@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export default function CustomSnackbar({
-  open, message, type, setSnackbar,
+  open, message, setSnackbar,
 }) {
   // useEffect to get class using type variable
   const handleClose = (event, reason) => {
@@ -41,6 +41,5 @@ export default function CustomSnackbar({
 CustomSnackbar.propTypes = {
   open: PropTypes.bool.isRequired,
   message: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
   setSnackbar: PropTypes.func.isRequired,
 };

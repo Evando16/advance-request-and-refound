@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderComponent Snapshot tests should render header component 1`] = `""`;
+
+exports[`HeaderComponent Snapshot tests should render header component with conditional fields 1`] = `""`;

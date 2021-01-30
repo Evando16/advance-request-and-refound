@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-import requestHeaderData, { parseBreakfastFlag } from './header-service';
+import requestHeaderData from './solicitation-service';
 
 jest.mock('axios');
 
@@ -39,14 +38,7 @@ describe('HeaderService', () => {
   const expectedHeaderData = {
     accountabilityExtraInfo: {
       amountOfPeople: 1,
-      budgetForBreakfast: 'Não',
       eventDate: '05/14/2020',
-    },
-    analyst: null,
-    collaborator: {
-      email: 'quickops-bs@hotmart.com',
-      id: 10436247,
-      name: 'Quickops BS',
     },
     costCenters: [
       {
@@ -60,8 +52,8 @@ describe('HeaderService', () => {
       id: 41,
       title: 'Afiliados Brasil',
     },
-    purpose: 'Confraternização',
-    type: 'Reembolso',
+    purpose: 'Fraternization',
+    type: 'Refund',
   };
 
   describe('Unit tests', () => {
@@ -71,14 +63,6 @@ describe('HeaderService', () => {
       const result = await requestHeaderData();
 
       expect(result).toEqual(expectedHeaderData);
-    });
-
-    it('should parse false breakfast flag to text', () => {
-      expect(parseBreakfastFlag(false)).toEqual('Não');
-    });
-
-    it('should parse true breakfast flag to text', () => {
-      expect(parseBreakfastFlag(true)).toEqual('Sim');
     });
   });
 });

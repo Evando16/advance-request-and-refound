@@ -1,28 +1,29 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import { faReceipt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Header from '../components/header/header';
-import Timeline from '../components/timeline/timeline';
-import NewExpense from '../components/new-expense/new-expense';
-import Sidebar from '../components/sidebar/sidebar';
-import saveExpense from '../components/new-expense/new-expense-service';
+import Header from '../../components/header/header';
+import Timeline from '../../components/timeline/timeline';
+import NewExpense from '../../components/new-expense/new-expense';
+import Sidebar from '../../components/sidebar/sidebar';
+import saveExpense from '../../components/new-expense/new-expense-service';
+import requestHeaderData from './solicitation-service';
 
 export function saveNewExpense(expense) {
   saveExpense(expense)
     .then(() => {
       // change to use react.context
       // setSnackbar({ open: true, message: 'Despesa salva com sucesso :)', type: 'sucess' });
-      toggleVision();
+      // toggleVision();
     })
     .catch(() => {
       // change to use react.context
-      // setSnackbar({ open: true, message: 'Ops... Um erro aconteceu na hora de salvar sua despesa :(', type: 'error' });
+      // setSnackbar({ open: true, message: 'error' type: 'error' });
     });
 }
 
-export default function Solicitation({ setSnackbar }) {
+export default function Solicitation() {
+  const [headerData, setHeaderData] = useState(null);
   const [showNewExpense, setShowNewExpense] = useState(false);
   const [newExpense, setNewExpense] = useState({
     expenseType: '',
@@ -33,6 +34,13 @@ export default function Solicitation({ setSnackbar }) {
     valueToBePaid: '',
     receiptImage: {},
   });
+
+  useEffect(() => {
+    async function getHeaderData() {
+      setHeaderData(await requestHeaderData());
+    }
+    getHeaderData();
+  }, []);
 
   function toggleNewExpense() {
     setShowNewExpense(!showNewExpense);
@@ -48,7 +56,7 @@ export default function Solicitation({ setSnackbar }) {
 
   return (
     <>
-      <Header />
+      {headerData && <Header headerData={headerData} setHeaderData={setHeaderData} />}
       <button type="button" onClick={toggleNewExpense}>
         <FontAwesomeIcon icon={faReceipt} />
         Adicionar Despesa
@@ -66,7 +74,3 @@ export default function Solicitation({ setSnackbar }) {
     </>
   );
 }
-
-Solicitation.propTypes = {
-  setSnackbar: PropTypes.func.isRequired,
-};

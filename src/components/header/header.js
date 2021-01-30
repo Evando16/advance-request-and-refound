@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { TextField, Card } from '@material-ui/core';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-
-import requestHeaderData from './header-service';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 
 const useStyles = makeStyles({
   cardContainier: {
@@ -19,75 +19,79 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Header() {
+export default function Header({ headerData }) {
   const classes = useStyles();
-  const [headerData, setHeaderData] = useState(null);
-  useEffect(() => {
-    async function getHeaderData() {
-      setHeaderData(await requestHeaderData());
-    }
-    getHeaderData();
-  }, []);
-
-  // remove this and use improve
-  if (!headerData) {
-    return 'Loading...';
-  }
 
   return (
-    <Card className={classes.cardContainier}>
+    <div className={classes.cardContainier}>
       <div>
         <span>{headerData.type}</span>
+        <span>-</span>
+        <span>{headerData.purpose}</span>
         <span>
           #
           {headerData.id}
         </span>
-        <span>{headerData.justification}</span>
       </div>
       <div className={classes.cardContent}>
         <div>
           <div>
-            <span>Nome</span>
-            <span>{headerData.collaborator.name}</span>
-          </div>
-          <div>
-            <span>E-mail</span>
-            <span>{headerData.collaborator.email}</span>
-          </div>
-          <div>
-            <span>Justificativa</span>
+            <span>Justification</span>
             <span>{headerData.justification}</span>
           </div>
           <div>
-            <span>Finalidade</span>
+            <span>Finality</span>
             <span>{headerData.purpose}</span>
           </div>
           <div>
-            <span>Projeto</span>
-            <span>{headerData.project.name}</span>
-          </div>
-          <div>
-            <span>Data</span>
+            <span>Event date</span>
             <span>{headerData.accountabilityExtraInfo.eventDate}</span>
           </div>
           <div>
-            <span>Quantidade</span>
+            <span>Amount</span>
             <span>{headerData.accountabilityExtraInfo.amountOfPeople}</span>
           </div>
           <div>
-            <span>Inclui café da manhã</span>
-            <span>{headerData.accountabilityExtraInfo.budgetForBreakfast}</span>
+            <span>Project</span>
+            {headerData.project
+              ? <span>{headerData.project.title}</span>
+              : <span>-</span>}
           </div>
         </div>
         <div>
-          <TextField label="Atribuir analista" variant="filled" />
-          <div>
-            <span>Centro de Custo</span>
-            {headerData.costCenters
-              .map((costCenter) => <span key={costCenter.name}>{costCenter.name}</span>)}
-          </div>
+          <span>Cost center</span>
+          {headerData.costCenters
+            .map((costCenter) => <span key={costCenter.name}>{costCenter.name}</span>)}
+        </div>
+        <div>
+          <FontAwesomeIcon icon={faGraduationCap} />
+          <span>This solicitation will be paid by education / fraternization budget </span>
         </div>
       </div>
-    </Card>
+    </div>
   );
 }
+
+Header.propTypes = {
+  headerData: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    justification: PropTypes.string.isRequired,
+    purpose: PropTypes.string.isRequired,
+    project: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+    }),
+    accountabilityExtraInfo: PropTypes.shape({
+      eventDate: PropTypes.string.isRequired,
+      amountOfPeople: PropTypes.number.isRequired,
+    }).isRequired,
+    analyst: PropTypes.shape({
+      id: PropTypes.number, name: PropTypes.string,
+    }),
+    costCenters: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    })).isRequired,
+  }).isRequired,
+};

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Solicitation from './pages/solicitation';
+import Solicitation from './pages/solicitation/solicitation';
 import CustomSnackbar from './components/snackbar/snackbar';
 
 export default function App() {
@@ -14,7 +14,7 @@ export default function App() {
         type={snackbar.type}
         setSnackbar={setSnackbar}
       />
-      <Solicitation setSnackbar={setSnackbar} />
+      <Solicitation />
     </>
   );
 }
