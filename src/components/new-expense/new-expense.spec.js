@@ -30,7 +30,7 @@ describe('NewExpenseComponent', () => {
   };
 
   const setExpense = jest.fn();
-  const onSubmit = jest.fn();
+  const onSubmit = jest.fn((event) => event.preventDefault());
 
   let component = null;
 
