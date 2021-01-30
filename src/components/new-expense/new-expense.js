@@ -1,75 +1,23 @@
-import React, { useState } from 'react';
-import {
-  Button,
-  Card,
-  CardContent,
-  CardActions,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-  TextField,
-  Grid,
-} from '@material-ui/core';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-import ptBrLocale from 'date-fns/locale/pt-BR';
+import React from 'react';
 import PropTypes from 'prop-types';
-import NumberFormat from 'react-number-format';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
-import saveExpense from './new-expense-service';
-
 const CURRENCY_OPTIONS = [
+  { value: '', description: '' },
   { value: 'BRL', description: 'BRL' },
   { value: 'USD', description: 'USD' },
   { value: 'MXN', description: 'MXN' },
 ];
 
 const EXPENSE_TYPE_OPTIONS = [
+  { value: '', description: '' },
   { value: 'hotel-fee', description: 'Hotel' },
   { value: 'food', description: 'Alimentação' },
   { value: 'transport', description: 'Transporte' },
 ];
 
-function NumberFormatCustom(props) {
-  const { inputRef, onChange, ...others } = props;
-  return (
-    <NumberFormat
-      {...others}
-      getInputRef={inputRef}
-      onValueChange={(values) => {
-        onChange({
-          target: {
-            value: values.value,
-          },
-        });
-      }}
-      thousandSeparator
-      decimalScale={2}
-      fixedDecimalScale
-      isNumericString
-    />
-  );
-}
-
-NumberFormatCustom.propTypes = {
-  inputRef: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
-
-export default function NewExpense({ toggleVision, setSnackbar }) {
-  const [expense, setExpense] = useState({
-    expenseType: '',
-    currency: '',
-    description: '',
-    receiptDate: null,
-    receiptValue: '',
-    valueToBePaid: '',
-    receiptImage: {},
-  });
-
+export default function NewExpense({ expense, setExpense, onSubmit }) {
   const onChangeExpenseType = (event) => {
     setExpense({ ...expense, expenseType: event.target.value });
   };
@@ -82,8 +30,8 @@ export default function NewExpense({ toggleVision, setSnackbar }) {
     setExpense({ ...expense, description: event.target.value });
   };
 
-  const onChangeReceiptDate = (date) => {
-    setExpense({ ...expense, receiptDate: date });
+  const onChangeReceiptDate = (event) => {
+    setExpense({ ...expense, receiptDate: event.target.value });
   };
 
   const onChangeReceiptValue = (event) => {
@@ -114,37 +62,10 @@ export default function NewExpense({ toggleVision, setSnackbar }) {
     setExpense({ ...expense, receiptImage: receipt });
   };
 
-  function isFormValid() {
-    if (!expense.expenseType
-      && !expense.currency
-      && !expense.description
-      && !expense.receiptDate
-      && !expense.receiptValue
-      && !expense.valueToBePaid
-      && !expense.receiptImage.error) {
-      return false;
-    }
-    return true;
-  }
-
-  function saveNewExpense() {
-    if (isFormValid) {
-      saveExpense(expense)
-        .then(() => {
-          setSnackbar({ open: true, message: 'Despesa salva com sucesso :)', type: 'sucess' });
-          toggleVision();
-        })
-        .catch(() => {
-          // LOG ERROR IN SOME API
-          setSnackbar({ open: true, message: 'Ops... Um erro aconteceu na hora de salvar sua despesa :(', type: 'error' });
-        });
-    }
-  }
-
   return (
-    <Card>
-      <form onSubmit={saveNewExpense}>
-        <CardContent>
+    <div>
+      <form onSubmit={onSubmit}>
+        <div>
           <div>
             <span>Nova despesa</span>
           </div>
@@ -154,12 +75,11 @@ export default function NewExpense({ toggleVision, setSnackbar }) {
                 <span>Recibo, cupom ou nota fiscal*</span>
                 <FontAwesomeIcon icon={faQuestionCircle} />
               </div>
-              <label htmlFor="contained-button-file">
-                <Button variant="outlined" color="primary" component="span" style={{ borderStyle: 'dashed' }}>
-                  Selecione um arquivo do seu computador
-                </Button>
+              <label htmlFor="new-expense__file" style={{ border: '1px dashed black', cursor: 'pointer' }}>
+                Select file
                 <input
-                  id="contained-button-file"
+                  id="new-expense__file"
+                  data-testid="new-expense__file"
                   style={{ display: 'none' }}
                   onChange={onChangeReceiptImage}
                   accept=".jpg,.png"
@@ -170,106 +90,132 @@ export default function NewExpense({ toggleVision, setSnackbar }) {
             </div>
             <div>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <FormControl required>
-                  <InputLabel id="new-expense__type-label">Tipo</InputLabel>
-                  <Select
-                    labelId="new-expense__type"
+                <label htmlFor="new-expense__type-selec">
+                  Tipo
+                  <select
                     id="new-expense__type-select"
+                    data-testid="new-expense__type-select"
+                    required
                     value={expense.expenseType}
                     onChange={onChangeExpenseType}
                   >
                     {EXPENSE_TYPE_OPTIONS.map((item) => (
-                      <MenuItem key={item.value} value={item.value}>{item.description}</MenuItem>
+                      <option key={item.value} value={item.value}>{item.description}</option>
                     ))}
-                  </Select>
-                </FormControl>
-                <TextField
-                  required
-                  id="new-expense__description"
-                  label="Descrição da despesa"
-                  value={expense.description}
-                  onChange={onChangeDescription}
-                />
-                <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ptBrLocale}>
-                  <KeyboardDatePicker
+                  </select>
+                </label>
+                <label htmlFor="new-expense__description">
+                  Descrição da despesa
+                  <input
                     required
-                    variant="inline"
-                    format="dd/MM/yyyy"
-                    margin="normal"
+                    id="new-expense__description"
+                    data-testid="new-expense__description"
+                    value={expense.description}
+                    onChange={onChangeDescription}
+                  />
+                </label>
+                <label htmlFor="new-expense__receipt-date">
+                  Data do comprovante
+                  <input
+                    required
                     id="new-expense__receipt-date"
-                    label="Data do comprovante"
+                    data-testid="new-expense__receipt-date"
                     value={expense.receiptDate}
                     onChange={onChangeReceiptDate}
-                    autoOk
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date',
-                    }}
-                    invalidDateMessage="Data inválida"
-                    maxDateMessage="Data não deve ser maior do que a data máxima"
-                    minDateMessage="Data não deve ser menor do que a data mínima"
+                    type="date"
+                    min="1900-01-01"
+                    max="2077-01-01"
                   />
-                </MuiPickersUtilsProvider>
-                <FormControl required>
-                  <InputLabel id="new-expense__currency-label">Moeda</InputLabel>
-                  <Select
-                    labelId="new-expense__currency"
+                </label>
+                <label htmlFor="new-expense__currency-select">
+                  Moeda
+                  <select
+                    required
+                    data-testid="new-expense__currency-select"
                     id="new-expense__currency-select"
                     value={expense.currency}
                     onChange={onChangeCurrency}
                   >
                     {CURRENCY_OPTIONS.map((item) => (
-                      <MenuItem key={item.value} value={item.value}>{item.description}</MenuItem>
+                      <option key={item.value} value={item.value}>{item.description}</option>
                     ))}
-                  </Select>
-                </FormControl>
+                  </select>
+                </label>
                 {expense.currency && (
                   <>
-                    <TextField
-                      required
+                    <input
                       id="new-expense__receipt-value"
+                      data-testid="new-expense__receipt-value"
+                      type="number"
+                      min="0"
+                      required
                       label="Valor da nota / cupom"
                       value={expense.receiptValue}
                       onChange={onChangeReceiptValue}
-                      InputProps={{
-                        inputComponent: NumberFormatCustom,
-                      }}
                     />
-                    <TextField
-                      required
+                    <input
                       id="new-expense__value-to-be-paid"
+                      data-testid="new-expense__value-to-be-paid"
+                      type="number"
+                      min="0"
+                      required
                       label="Valor a ser considerado"
                       value={expense.valueToBePaid}
                       onChange={onChangeValueToBePaid}
-                      InputProps={{
-                        inputComponent: NumberFormatCustom,
-                      }}
                     />
                   </>
                 )}
               </div>
             </div>
           </div>
-        </CardContent>
-        <CardActions>
-          <Grid container justify="flex-end" spacing={2}>
-            <Grid item>
-              <Button variant="outlined" color="primary" onClick={toggleVision}>
+        </div>
+        <div>
+          <div>
+            <div>
+              <button
+                id="new-expense__btn-cancel"
+                data-testid="new-expense__btn-cancel"
+                type="button"
+              >
                 Cancelar
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button variant="contained" color="primary" onClick={saveNewExpense}>
+              </button>
+            </div>
+            <div>
+              <button
+                id="new-expense__btn-submit"
+                data-testid="new-expense__btn-submit"
+                type="submit"
+              >
                 Salvar
-              </Button>
-            </Grid>
-          </Grid>
-        </CardActions>
+              </button>
+            </div>
+          </div>
+        </div>
       </form>
-    </Card>
+    </div>
   );
 }
 
 NewExpense.propTypes = {
-  toggleVision: PropTypes.func.isRequired,
-  setSnackbar: PropTypes.func.isRequired,
+  setExpense: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  expense: PropTypes.shape({
+    expenseType: PropTypes.string.isRequired,
+    currency: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    receiptDate: PropTypes.string.isRequired,
+    receiptValue: PropTypes.string.isRequired,
+    valueToBePaid: PropTypes.string.isRequired,
+    receiptImage: PropTypes.shape({
+      error: PropTypes.string,
+      file: PropTypes.shape({
+        lastModified: PropTypes.number.isRequired,
+        lastModifiedDate: PropTypes.objectOf(Date).isRequired,
+        name: PropTypes.string.isRequired,
+        size: PropTypes.number.isRequired,
+        type: PropTypes.string.isRequired,
+        webkitRelativePath: PropTypes.string.isRequired,
+      }),
+    }),
+  }).isRequired,
 };
