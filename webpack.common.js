@@ -11,7 +11,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/i,
+        test: /^(?!.*\.spec\.js$).*\.js$/i,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
@@ -23,7 +23,7 @@ module.exports = {
       hash: true,
       inject: false,
       title: 'Request & Refound',
-      template: './index.html',
+      template: './src/index.html',
     }),
     new CleanWebpackPlugin(),
   ],
