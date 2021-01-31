@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { HEADER_API_ROUTE, SIDEBAR_API_ROUTE, TIMELINE_API_ROUTE } from '../../shared/api-constants';
-import formatCurrency from '../../utils/currency';
-import parseDate from '../../utils/date';
-import parseToPascalCase from '../../utils/text';
+import formatCurrency from '../../shared/utils/currency';
+import parseDate from '../../shared/utils/date';
+import parseToPascalCase from '../../shared/utils/text';
 
 const EXPENSE_TYPE = {
   'hotel-fee': 'Hotel',
