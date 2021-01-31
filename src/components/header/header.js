@@ -1,30 +1,82 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 
-const useStyles = makeStyles({
-  cardContainier: {
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundImage: 'linear-gradient(to right, #00d7ce 3%, #00c5fc)',
-  },
-  cardContent: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  analystInput: {
-    backgroundColor: '#fff',
-  },
-});
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(to right, #00d7ce 3%, #00c5fc);
+  border-radius: 12px;
+  padding: 24px 40px;
+  color: #fff;
+`;
+
+const HeaderTyle = styled.div`
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 2vh;
+`;
+
+const HeaderContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const HeaderQuadrant = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 33%;
+  flex-grow : 1;
+`;
+
+const HeaderQuadrantItem = styled.div`
+  display: flex;
+`;
+
+const HeaderInfoCostCenterQuadrant = styled(HeaderQuadrant)`
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+`;
+
+const HeaderText = styled.span`
+  font-size: 0.875rem;
+`;
+
+const HeaderLabel = styled(HeaderText)`
+  font-weight: 400;
+  margin-right: 1vw;
+  text-align: ${(props) => (props.textAling ? props.textAling : 'start')};
+  width: ${(props) => (props.width ? props.width : '')};
+`;
+
+const HeaderData = styled(HeaderText)`
+  font-weight: 700;
+  text-align: ${(props) => (props.textAling ? props.textAling : 'start')};
+`;
+
+const HeaderDataCostCenter = styled.span`
+  font-size: 1ream;
+  font-weight: 700;
+`;
+
+const HeaderCenterData = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: ${(props) => (props.alignItems ? props.alignItems : 'start')};
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  font-size: 1.5rem;
+`;
 
 export default function Header({ headerData }) {
-  const classes = useStyles();
-
   return (
-    <div className={classes.cardContainier}>
-      <div>
+    <HeaderContainer>
+      <HeaderTyle>
         <span>{headerData.type}</span>
         <span>-</span>
         <span>{headerData.purpose}</span>
@@ -32,43 +84,55 @@ export default function Header({ headerData }) {
           #
           {headerData.id}
         </span>
-      </div>
-      <div className={classes.cardContent}>
-        <div>
-          <div>
-            <span>Justification</span>
-            <span>{headerData.justification}</span>
-          </div>
-          <div>
-            <span>Finality</span>
-            <span>{headerData.purpose}</span>
-          </div>
-          <div>
-            <span>Event date</span>
-            <span>{headerData.accountabilityExtraInfo.eventDate}</span>
-          </div>
-          <div>
-            <span>Amount</span>
-            <span>{headerData.accountabilityExtraInfo.amountOfPeople}</span>
-          </div>
-          <div>
-            <span>Project</span>
+      </HeaderTyle>
+      <HeaderContent>
+        <HeaderQuadrant>
+          <HeaderQuadrantItem>
+            <HeaderLabel textAling="end" width="14%">Justification</HeaderLabel>
+            <HeaderData>{headerData.justification}</HeaderData>
+          </HeaderQuadrantItem>
+          <HeaderQuadrantItem>
+            <HeaderLabel textAling="end" width="14%">Finality</HeaderLabel>
+            <HeaderData>{headerData.purpose}</HeaderData>
+          </HeaderQuadrantItem>
+          <HeaderQuadrantItem>
+            <HeaderLabel textAling="end" width="14%">Event date</HeaderLabel>
+            <HeaderData>{headerData.accountabilityExtraInfo.eventDate}</HeaderData>
+          </HeaderQuadrantItem>
+          <HeaderQuadrantItem>
+            <HeaderLabel textAling="end" width="14%">Amount</HeaderLabel>
+            <HeaderData>{headerData.accountabilityExtraInfo.amountOfPeople}</HeaderData>
+          </HeaderQuadrantItem>
+          <HeaderQuadrantItem>
+            <HeaderLabel textAling="end" width="14%">Project</HeaderLabel>
             {headerData.project
-              ? <span>{headerData.project.title}</span>
-              : <span>-</span>}
-          </div>
-        </div>
-        <div>
-          <span>Cost center</span>
-          {headerData.costCenters
-            .map((costCenter) => <span key={costCenter.name}>{costCenter.name}</span>)}
-        </div>
-        <div>
-          <FontAwesomeIcon icon={faGraduationCap} />
-          <span>This solicitation will be paid by education / fraternization budget </span>
-        </div>
-      </div>
-    </div>
+              ? <HeaderData>{headerData.project.title}</HeaderData>
+              : <HeaderData>-</HeaderData>}
+          </HeaderQuadrantItem>
+        </HeaderQuadrant>
+        <HeaderInfoCostCenterQuadrant>
+          <HeaderCenterData>
+            <HeaderLabel>Cost center</HeaderLabel>
+            {headerData.costCenters
+              .map((costCenter) => (
+                <HeaderDataCostCenter
+                  key={costCenter.name}
+                >
+                  {costCenter.name}
+                </HeaderDataCostCenter>
+              ))}
+          </HeaderCenterData>
+        </HeaderInfoCostCenterQuadrant>
+        <HeaderQuadrant>
+          <HeaderCenterData alignItems="center">
+            <Icon icon={faGraduationCap} />
+            <HeaderData textAling="center">
+              This solicitation will be paid by education / fraternization budget
+            </HeaderData>
+          </HeaderCenterData>
+        </HeaderQuadrant>
+      </HeaderContent>
+    </HeaderContainer>
   );
 }
 
