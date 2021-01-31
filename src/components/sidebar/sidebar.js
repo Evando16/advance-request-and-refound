@@ -1,37 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { Card, CardContent } from '@material-ui/core';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleUp, faArrowAltCircleDown } from '@fortawesome/free-regular-svg-icons';
-import getSidebarInfo from './sidebar-service';
+import PropTypes from 'prop-types';
 
-export default function Sidebar() {
-  const [sidebarData, setSidebarData] = useState([]);
-
-  useEffect(() => {
-    async function getSidebarCheck() {
-      setSidebarData(await getSidebarInfo());
-    }
-
-    getSidebarCheck();
-  }, []);
-
+export default function Sidebar({ sidebarData }) {
   return (
     <div>
       {sidebarData.map((item) => (
-        <Card key={item.id} style={{ padding: '16px' }}>
-          <Card variant="outlined" style={{ padding: '16px' }}>
+        <div key={item.id} style={{ padding: '16px' }}>
+          <div variant="outlined" style={{ padding: '16px' }}>
             <span>Status</span>
             <span>{item.accountabilityStatus}</span>
-          </Card>
+          </div>
 
-          <Card variant="outlined">
-            <CardContent>
+          <div variant="outlined">
+            <div>
               <div>
                 <span>BALANCE</span>
                 {item.balance !== '0'
                   ? (
                     <div>
-                      <span>{item.currency.code}</span>
+                      <span>{item.currencyCode}</span>
                       <span>{item.balance}</span>
                     </div>
                   )
@@ -87,10 +76,23 @@ export default function Sidebar() {
                     </div>
                   )}
               </div>
-            </CardContent>
-          </Card>
-        </Card>
+            </div>
+          </div>
+        </div>
       ))}
     </div>
   );
 }
+
+Sidebar.propTypes = {
+  sidebarData: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    accountabilityStatus: PropTypes.string.isRequired,
+    currencyCode: PropTypes.string.isRequired,
+    declared: PropTypes.string.isRequired,
+    approved: PropTypes.string.isRequired,
+    received: PropTypes.string.isRequired,
+    returned: PropTypes.string.isRequired,
+    balance: PropTypes.string,
+  })).isRequired,
+};

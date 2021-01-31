@@ -1,27 +1,8 @@
 import axios from 'axios';
-import { HEADER_API_ROUTE, TIMELINE_API_ROUTE } from '../../shared/api-constants';
+import { HEADER_API_ROUTE, SIDEBAR_API_ROUTE, TIMELINE_API_ROUTE } from '../../shared/api-constants';
 import formatCurrency from '../../utils/currency';
 import parseDate from '../../utils/date';
 import parseToPascalCase from '../../utils/text';
-
-function parseHttpHeaderResponse(data) {
-  return {
-    id: data.id,
-    type: parseToPascalCase(data.type),
-    justification: data.justification,
-    purpose: parseToPascalCase(data.purpose),
-    project: {
-      id: data.project.id,
-      title: data.project.title,
-    },
-    accountabilityExtraInfo: {
-      eventDate: parseDate(data.accountabilityExtraInfo.eventDate),
-      amountOfPeople: data.accountabilityExtraInfo.amountOfPeople,
-    },
-    costCenters: data.costCenters
-      .map((constCenter) => ({ id: constCenter.id, name: constCenter.name })),
-  };
-}
 
 const EXPENSE_TYPE = {
   'hotel-fee': 'Hotel',
@@ -56,6 +37,25 @@ function getTypeDescription(timeLineItem) {
   }
 }
 
+function parseHttpHeaderResponse(data) {
+  return {
+    id: data.id,
+    type: parseToPascalCase(data.type),
+    justification: data.justification,
+    purpose: parseToPascalCase(data.purpose),
+    project: {
+      id: data.project.id,
+      title: data.project.title,
+    },
+    accountabilityExtraInfo: {
+      eventDate: parseDate(data.accountabilityExtraInfo.eventDate),
+      amountOfPeople: data.accountabilityExtraInfo.amountOfPeople,
+    },
+    costCenters: data.costCenters
+      .map((constCenter) => ({ id: constCenter.id, name: constCenter.name })),
+  };
+}
+
 function parseTimelineData(data) {
   return data.content.map((item) => ({
     id: item.id,
@@ -68,6 +68,19 @@ function parseTimelineData(data) {
     amountSpent: formatCurrency(item.amountSpent, item.currencyCode),
     amountTotal: formatCurrency(item.amountTotal, item.currencyCode),
     resourceUrl: item.resourceUrl,
+  }));
+}
+
+function parseSidebarInfo(data) {
+  return data.map((item, index) => ({
+    id: index,
+    currencyCode: item.currency.code,
+    declared: formatCurrency(item.declared, item.currency.code),
+    approved: formatCurrency(item.approved, item.currency.code),
+    received: formatCurrency(item.received, item.currency.code),
+    returned: formatCurrency(item.returned, item.currency.code),
+    balance: formatCurrency(item.balance, item.currency.code),
+    accountabilityStatus: parseToPascalCase(item.accountabilityStatus),
   }));
 }
 
@@ -86,4 +99,10 @@ export async function requestTimelineData() {
       return Promise.resolve([]);
     })
     .catch(() => Promise.reject(new Error('Ops... Fail to recovery Timeline data :(')));
+}
+
+export async function requestSidebarInfo() {
+  return axios.get(SIDEBAR_API_ROUTE)
+    .then((response) => Promise.resolve(parseSidebarInfo(response.data.content)))
+    .catch(() => Promise.reject(new Error('Ops... Fail to recovery Sidebard data :(')));
 }

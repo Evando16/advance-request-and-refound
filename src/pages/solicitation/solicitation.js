@@ -7,7 +7,7 @@ import Timeline from '../../components/timeline/timeline';
 import NewExpense from '../../components/new-expense/new-expense';
 import Sidebar from '../../components/sidebar/sidebar';
 import saveExpense from '../../components/new-expense/new-expense-service';
-import { requestHeaderData, requestTimelineData } from './solicitation-service';
+import { requestSidebarInfo, requestHeaderData, requestTimelineData } from './solicitation-service';
 
 export function saveNewExpense(expense) {
   saveExpense(expense)
@@ -35,6 +35,7 @@ export default function Solicitation() {
     valueToBePaid: '',
     receiptImage: {},
   });
+  const [sidebarData, setSidebarData] = useState([]);
 
   useEffect(() => {
     requestHeaderData()
@@ -43,6 +44,10 @@ export default function Solicitation() {
 
     requestTimelineData()
       .then((result) => setTimelineData(result))
+      .catch((error) => console.log(error.message));
+
+    requestSidebarInfo()
+      .then((result) => setSidebarData(result))
       .catch((error) => console.log(error.message));
   }, []);
 
@@ -74,7 +79,7 @@ export default function Solicitation() {
           />
         )}
       <Timeline timelineData={timelineData} />
-      <Sidebar />
+      <Sidebar sidebarData={sidebarData} />
     </>
   );
 }

@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { requestHeaderData, requestTimelineData } from './solicitation-service';
+import { HEADER_API_ROUTE, SIDEBAR_API_ROUTE, TIMELINE_API_ROUTE } from '../../shared/api-constants';
+import { requestSidebarInfo, requestHeaderData, requestTimelineData } from './solicitation-service';
 
 jest.mock('axios');
 
-describe('HeaderService', () => {
+describe('SolicitationService', () => {
   const headerDataHttpMock = {
     id: 756,
     createdOn: 1588613238775,
@@ -100,35 +101,88 @@ describe('HeaderService', () => {
     },
   ];
 
+  const sidebarHttpMock = {
+    content: [
+      {
+        accountabilityId: 16,
+        accountabilityStatus: 'OPEN',
+        currency: {
+          id: 1,
+          name: 'Argentine peso',
+          code: 'ARS',
+          symbol: 'ARS$',
+        },
+        declared: 123213.21,
+        approved: 0,
+        received: 0,
+        returned: 0,
+        balance: 0,
+        updatedOn: 1590525677543,
+      },
+    ],
+  };
+
+  const expectedSidebar = [
+    {
+      id: 0,
+      accountabilityStatus: 'Open',
+      currencyCode: 'ARS',
+      declared: '123.213,21',
+      approved: '0',
+      received: '0',
+      returned: '0',
+      balance: '0',
+    },
+  ];
+
   describe('Unit tests', () => {
     it('should request header data', async () => {
       axios.get.mockResolvedValue({ data: headerDataHttpMock });
 
       await expect(requestHeaderData()).resolves.toEqual(expectedHeaderData);
+      expect(axios.get).toHaveBeenCalledWith(HEADER_API_ROUTE);
     });
 
     it('should got failt to request header data', async () => {
       axios.get.mockImplementation(() => Promise.reject(new Error('erro to test catch')));
 
       await expect(requestHeaderData()).rejects.toThrow('Ops... Fail to recovery Header data :(');
+      expect(axios.get).toHaveBeenCalledWith(HEADER_API_ROUTE);
     });
 
     it('should request timeline data', async () => {
       axios.get.mockResolvedValue({ data: timelineDataHttpMock });
 
       await expect(requestTimelineData()).resolves.toEqual(expectedTimelineData);
+      expect(axios.get).toHaveBeenCalledWith(TIMELINE_API_ROUTE);
     });
 
     it('should return empty array when fail to get timeline data', async () => {
       axios.get.mockResolvedValue({ data: null });
 
       await expect(requestTimelineData()).resolves.toEqual([]);
+      expect(axios.get).toHaveBeenCalledWith(TIMELINE_API_ROUTE);
     });
 
     it('should got fail to request timeline data', async () => {
       axios.get.mockImplementation(() => Promise.reject(new Error('erro to test catch')));
 
       await expect(requestTimelineData()).rejects.toThrow('Ops... Fail to recovery Timeline data :(');
+      expect(axios.get).toHaveBeenCalledWith(TIMELINE_API_ROUTE);
+    });
+
+    it('should request sidebar data', async () => {
+      axios.get.mockResolvedValue({ data: sidebarHttpMock });
+
+      await expect(requestSidebarInfo()).resolves.toEqual(expectedSidebar);
+      expect(axios.get).toHaveBeenCalledWith(SIDEBAR_API_ROUTE);
+    });
+
+    it('should got fail to request sidebar data', async () => {
+      axios.get.mockImplementation(() => Promise.reject(new Error('erro to test catch')));
+
+      await expect(requestSidebarInfo()).rejects.toThrow('Ops... Fail to recovery Sidebard data :(');
+      expect(axios.get).toHaveBeenCalledWith(SIDEBAR_API_ROUTE);
     });
   });
 });
