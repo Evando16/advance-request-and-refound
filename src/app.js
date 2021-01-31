@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import Solicitation from './pages/solicitation/solicitation';
 
 import CustomSnackbar from './components/snackbar/snackbar';
 
 const GlobalStyle = createGlobalStyle`
 body {
-  padding: 2vh 4vw 0 4vw;
+  padding: 0 2vw;
+  margin: 0;
   background-color: #053d4e;
   font-family: 'Nunito Sans', sans-serif;
 }
+`;
+
+const AppContainer = styled.div`
+  background-color: #f4f6fa;
+  padding: 4vh 1vw 0 1vw;
 `;
 
 export default function App() {
@@ -25,7 +31,9 @@ export default function App() {
         type={snackbar.type}
         setSnackbar={setSnackbar}
       />
-      <Solicitation />
+      <AppContainer>
+        <Solicitation />
+      </AppContainer>
     </>
   );
 }

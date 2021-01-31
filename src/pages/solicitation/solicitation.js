@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { faReceipt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styled from 'styled-components';
 
 import Header from '../../components/header/header';
 import Timeline from '../../components/timeline/timeline';
@@ -8,6 +9,23 @@ import NewExpense from '../../components/new-expense/new-expense';
 import Sidebar from '../../components/sidebar/sidebar';
 import saveExpense from '../../components/new-expense/new-expense-service';
 import { requestSidebarInfo, requestHeaderData, requestTimelineData } from './solicitation-service';
+
+const SolicitationContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const SolicitationContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 77%;
+`;
+
+const SolicitationSidebar = styled.div`
+  width: 20%;
+  background-color: #fff;
+`;
 
 export function saveNewExpense(expense) {
   saveExpense(expense)
@@ -64,42 +82,46 @@ export default function Solicitation() {
   }
 
   return (
-    <>
-      {headerData
-        && (
-          <Header
-            data-testid="solicitation__header"
-            headerData={headerData}
-            setHeaderData={setHeaderData}
-          />
-        )}
-      <button type="button" onClick={toggleNewExpense}>
-        <FontAwesomeIcon icon={faReceipt} />
-        Adicionar Despesa
-      </button>
-      {showNewExpense
-        && (
-          <NewExpense
-            expense={newExpense}
-            setExpense={setNewExpense}
-            onCancel={toggleNewExpense}
-            onSubmit={onSubmitNewExpense}
-          />
-        )}
-      {timelineData.length > 0
-        && (
-          <Timeline
-            data-testid="solicitation__timeline"
-            timelineData={timelineData}
-          />
-        )}
+    <SolicitationContainer>
+      <SolicitationContent>
+        {headerData
+          && (
+            <Header
+              data-testid="solicitation__header"
+              headerData={headerData}
+              setHeaderData={setHeaderData}
+            />
+          )}
+        <button type="button" onClick={toggleNewExpense}>
+          <FontAwesomeIcon icon={faReceipt} />
+          Adicionar Despesa
+        </button>
+        {showNewExpense
+          && (
+            <NewExpense
+              expense={newExpense}
+              setExpense={setNewExpense}
+              onCancel={toggleNewExpense}
+              onSubmit={onSubmitNewExpense}
+            />
+          )}
+        {timelineData.length > 0
+          && (
+            <Timeline
+              data-testid="solicitation__timeline"
+              timelineData={timelineData}
+            />
+          )}
+      </SolicitationContent>
       {sidebarData.length > 0
         && (
-          <Sidebar
-            data-testid="solicitation__sidebar"
-            sidebarData={sidebarData}
-          />
+          <SolicitationSidebar>
+            <Sidebar
+              data-testid="solicitation__sidebar"
+              sidebarData={sidebarData}
+            />
+          </SolicitationSidebar>
         )}
-    </>
+    </SolicitationContainer>
   );
 }
