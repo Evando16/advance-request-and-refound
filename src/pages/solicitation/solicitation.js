@@ -7,7 +7,7 @@ import Timeline from '../../components/timeline/timeline';
 import NewExpense from '../../components/new-expense/new-expense';
 import Sidebar from '../../components/sidebar/sidebar';
 import saveExpense from '../../components/new-expense/new-expense-service';
-import requestHeaderData from './solicitation-service';
+import { requestHeaderData, requestTimelineData } from './solicitation-service';
 
 export function saveNewExpense(expense) {
   saveExpense(expense)
@@ -23,6 +23,7 @@ export function saveNewExpense(expense) {
 }
 
 export default function Solicitation() {
+  const [timelineData, setTimelineData] = useState([]);
   const [headerData, setHeaderData] = useState(null);
   const [showNewExpense, setShowNewExpense] = useState(false);
   const [newExpense, setNewExpense] = useState({
@@ -36,10 +37,13 @@ export default function Solicitation() {
   });
 
   useEffect(() => {
-    async function getHeaderData() {
-      setHeaderData(await requestHeaderData());
-    }
-    getHeaderData();
+    requestHeaderData()
+      .then((result) => setHeaderData(result))
+      .catch((error) => console.log(error.message));
+
+    requestTimelineData()
+      .then((result) => setTimelineData(result))
+      .catch((error) => console.log(error.message));
   }, []);
 
   function toggleNewExpense() {
@@ -69,7 +73,7 @@ export default function Solicitation() {
             onSubmit={onSubmitNewExpense}
           />
         )}
-      <Timeline />
+      <Timeline timelineData={timelineData} />
       <Sidebar />
     </>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 import pretty from 'pretty';
 import Header from './header';
 
@@ -31,21 +31,25 @@ describe('HeaderComponent', () => {
     type: 'Refund',
   };
 
-  let container = null;
-
-  beforeEach(() => {
-    container = render(<Header headerData={headerDataMock} />);
-  });
-
   describe('Snapshot tests', () => {
-    it('should render header component', async () => {
-      expect(pretty(container.innerHTML)).toMatchSnapshot();
+    let component = null;
+
+    beforeEach(() => {
+      component = render(<Header headerData={headerDataMock} />);
     });
 
-    it('should render header component with conditional fields', async () => {
-      container = render(<Header headerData={{ ...headerDataMock, project: null }} />);
+    afterEach(() => {
+      cleanup();
+    });
 
-      expect(pretty(container.innerHTML)).toMatchSnapshot();
+    it('should render header component', () => {
+      expect(pretty(component.container.innerHTML)).toMatchSnapshot();
+    });
+
+    it('should render header component with conditional fields', () => {
+      component = render(<Header headerData={{ ...headerDataMock, project: null }} />);
+
+      expect(pretty(component.container.innerHTML)).toMatchSnapshot();
     });
   });
 });

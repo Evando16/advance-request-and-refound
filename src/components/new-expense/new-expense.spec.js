@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, cleanup } from '@testing-library/react';
 import pretty from 'pretty';
 
 import NewExpense from './new-expense';
@@ -40,6 +40,11 @@ describe('NewExpenseComponent', () => {
         <NewExpense expense={emptyExpenseMock} setExpense={setExpense} onSubmit={onSubmit} />,
       );
     });
+
+    afterEach(() => {
+      cleanup();
+    });
+
     it('should render receipt value field when chose currency', () => {
       component = render(
         <NewExpense
@@ -157,6 +162,10 @@ describe('NewExpenseComponent', () => {
   });
 
   describe('Snapshot tests', () => {
+    afterEach(() => {
+      cleanup();
+    });
+
     it('should render new expense component without conditional fields', () => {
       const expenseMock = {
         expenseType: 'food',

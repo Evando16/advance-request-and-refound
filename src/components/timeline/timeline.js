@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Card } from '@material-ui/core';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUsers, faAsterisk, faConciergeBell, faReceipt, faUtensils,
 } from '@fortawesome/free-solid-svg-icons';
 
-import requestTimelineData from './timeline-service';
+import PropTypes from 'prop-types';
 
 function getExpenseIcon(timeLineItem) {
   switch (timeLineItem.expenseTypeIcon) {
     case 'utensils':
       return faUtensils;
-    case 'concierge-bell':
-      return faConciergeBell;
     default:
-      return null;
+      return faConciergeBell;
   }
 }
 
@@ -25,32 +22,15 @@ export function getCardIcon(timeLineItem) {
     case 'ACCOUNTABILITY_SUBMITTED':
     case 'ACCOUNTABILITY_CREATED':
       return faAsterisk;
-    case 'EXPENSE':
-      return getExpenseIcon(timeLineItem);
     default:
-      return null;
+      return getExpenseIcon(timeLineItem);
   }
 }
 
-export default function Timeline() {
-  const [timelineData, setTimelineData] = useState([]);
-
-  useEffect(() => {
-    async function getTimelineData() {
-      setTimelineData(await requestTimelineData());
-    }
-
-    getTimelineData();
-  }, []);
-
-  // remove this and use improve
-  if (!timelineData.length) {
-    return 'No timeline content =(';
-  }
-
+export default function Timeline({ timelineData }) {
   return (
     timelineData.map((item) => (
-      <Card key={item.id} style={{ marginTop: '24px', padding: '16px' }}>
+      <div key={item.id} style={{ marginTop: '24px', padding: '16px' }}>
         <div>
           <FontAwesomeIcon icon={getCardIcon(item)} />
           <span>{item.cardDate}</span>
@@ -81,7 +61,22 @@ export default function Timeline() {
             <a href={item.resourceUrl}>Receipt</a>
           </div>
         )}
-      </Card>
+      </div>
     ))
   );
 }
+
+Timeline.propTypes = {
+  timelineData: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    cardType: PropTypes.string.isRequired,
+    cardDate: PropTypes.string.isRequired,
+    expenseTypeIcon: PropTypes.string,
+    typeDescription: PropTypes.string,
+    status: PropTypes.string,
+    notes: PropTypes.string,
+    amountSpent: PropTypes.string,
+    amountTotal: PropTypes.string,
+    resourceUrl: PropTypes.string,
+  })).isRequired,
+};
