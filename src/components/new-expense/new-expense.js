@@ -17,7 +17,10 @@ const EXPENSE_TYPE_OPTIONS = [
   { value: 'transport', description: 'Transporte' },
 ];
 
-export default function NewExpense({ expense, setExpense, onSubmit }) {
+// TODO improve cancel action (if there is data)
+export default function NewExpense({
+  expense, setExpense, onCancel, onSubmit,
+}) {
   const onChangeExpenseType = (event) => {
     setExpense({ ...expense, expenseType: event.target.value });
   };
@@ -176,6 +179,7 @@ export default function NewExpense({ expense, setExpense, onSubmit }) {
                 id="new-expense__btn-cancel"
                 data-testid="new-expense__btn-cancel"
                 type="button"
+                onClick={onCancel}
               >
                 Cancelar
               </button>
@@ -198,6 +202,7 @@ export default function NewExpense({ expense, setExpense, onSubmit }) {
 
 NewExpense.propTypes = {
   setExpense: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   expense: PropTypes.shape({
     expenseType: PropTypes.string.isRequired,

@@ -39,16 +39,16 @@ export default function Solicitation() {
 
   useEffect(() => {
     requestHeaderData()
-      .then((result) => setHeaderData(result))
-      .catch((error) => console.log(error.message));
+      .then((result) => setHeaderData(result));
+    // .catch((error) => console.log(error.message));
 
     requestTimelineData()
-      .then((result) => setTimelineData(result))
-      .catch((error) => console.log(error.message));
+      .then((result) => setTimelineData(result));
+    // .catch((error) => console.log(error.message));
 
     requestSidebarInfo()
-      .then((result) => setSidebarData(result))
-      .catch((error) => console.log(error.message));
+      .then((result) => setSidebarData(result));
+    // .catch((error) => console.log(error.message));
   }, []);
 
   function toggleNewExpense() {
@@ -65,7 +65,14 @@ export default function Solicitation() {
 
   return (
     <>
-      {headerData && <Header headerData={headerData} setHeaderData={setHeaderData} />}
+      {headerData
+        && (
+          <Header
+            data-testid="solicitation__header"
+            headerData={headerData}
+            setHeaderData={setHeaderData}
+          />
+        )}
       <button type="button" onClick={toggleNewExpense}>
         <FontAwesomeIcon icon={faReceipt} />
         Adicionar Despesa
@@ -75,11 +82,24 @@ export default function Solicitation() {
           <NewExpense
             expense={newExpense}
             setExpense={setNewExpense}
+            onCancel={toggleNewExpense}
             onSubmit={onSubmitNewExpense}
           />
         )}
-      <Timeline timelineData={timelineData} />
-      <Sidebar sidebarData={sidebarData} />
+      {timelineData.length > 0
+        && (
+          <Timeline
+            data-testid="solicitation__timeline"
+            timelineData={timelineData}
+          />
+        )}
+      {sidebarData.length > 0
+        && (
+          <Sidebar
+            data-testid="solicitation__sidebar"
+            sidebarData={sidebarData}
+          />
+        )}
     </>
   );
 }
