@@ -28,14 +28,14 @@ const SidebarStatus = styled.div`
   border: ${(props) => props.border};
   border-radius: 6px;
   background-color: ${(props) => props.backgroundcolor};
-  padding: 16px 0;
+  padding: 1rem 0;
   margin-bottom: 1.5rem;
 `;
 
 const SidebarStatusLabel = styled.span`
   font-size: 1rem;
   color: #053d4e;
-  margin-bottom: 8px;
+  margin-bottom: .5rem;
 `;
 
 const SidebarDescription = styled.span`
@@ -56,7 +56,7 @@ const SidebarBalance = styled.div`
 const SidebarBalanceLabel = styled.span`
   font-size: .875rem;
   color: #6b7480;
-  margin-bottom: 8px;
+  margin-bottom: .5rem;
 `;
 const SidebarDetails = styled.div`
   display: flex;
@@ -79,7 +79,7 @@ const SidebarDetailsItem = styled.div`
 const SidebarDetailsIcon = styled(FontAwesomeIcon)`
   font-size: 1.5rem;
   color: #d0d3d6;
-  margin-right: 8px;
+  margin-right: .5rem;
 `;
 
 const SidebarLabel = styled.span`
@@ -93,7 +93,7 @@ const SidebarDetailsCurrency = styled.span`
 `;
 
 const SidebarCurrencyCode = styled(SidebarDetailsCurrency)`
-  margin-right: 8px;
+  margin-right: .5rem;
 `;
 
 const SidebarStatementContainer = styled.div`  
@@ -106,8 +106,8 @@ const SidebarStatementTitile = styled.span`
   font-weight: bold; 
   color: #353a40;
   border-bottom: 1px solid #f0f3f7;
-  padding: 16px 0;
-  margin-bottom: 16px;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
 `;
 
 const SidebarStatementHeader = styled.span` 
@@ -125,7 +125,7 @@ const SidebarStatementBody = styled.span`
   font-size: .875rem;
   font-weight: 700;
   color: #053d4e;
-  margin-top: 8px;
+  margin-top: .5rem;
 `;
 
 const SidebarCurrencyReturned = styled.div` 
@@ -158,7 +158,7 @@ export default function Sidebar({ sidebarData }) {
             {item.balance !== '0'
               ? (
                 <div>
-                  <SidebarDescription margin="0 8px 0 0">{item.currencyCode}</SidebarDescription>
+                  <SidebarDescription margin="0 .5rem 0 0">{item.currencyCode}</SidebarDescription>
                   <SidebarDescription>{item.balance}</SidebarDescription>
                 </div>
               )
