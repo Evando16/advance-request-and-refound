@@ -36,6 +36,7 @@ describe('SidebarComponent', () => {
       const sidebarWithConditionalLayout = [
         {
           ...expectedSidebar[0],
+          id: 0,
           accountabilityStatus: 'Approved',
           balance: '213,21',
           approved: '213,21',
@@ -43,6 +44,7 @@ describe('SidebarComponent', () => {
         },
         {
           ...expectedSidebar[0],
+          id: 1,
           accountabilityStatus: 'Pending',
           balance: '213,21',
           approved: '213,21',
@@ -50,6 +52,7 @@ describe('SidebarComponent', () => {
         },
         {
           ...expectedSidebar[0],
+          id: 2,
           accountabilityStatus: 'Open',
           balance: '213,21',
           approved: '213,21',
@@ -57,6 +60,7 @@ describe('SidebarComponent', () => {
         },
         {
           ...expectedSidebar[0],
+          id: 3,
           accountabilityStatus: 'Cancelled',
           balance: '213,21',
           approved: '213,21',
