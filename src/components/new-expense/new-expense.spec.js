@@ -1,10 +1,8 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, cleanup } from '@testing-library/react';
 import pretty from 'pretty';
 
 import NewExpense from './new-expense';
-
-jest.mock('./new-expense-service.js');
 
 describe('NewExpenseComponent', () => {
   const fileMock = {
@@ -31,39 +29,24 @@ describe('NewExpenseComponent', () => {
 
   const setExpense = jest.fn();
   const onSubmit = jest.fn((event) => event.preventDefault());
+  const onCancel = jest.fn((event) => event.preventDefault());
 
   let component = null;
 
   describe('Component tests', () => {
     beforeEach(() => {
       component = render(
-        <NewExpense expense={emptyExpenseMock} setExpense={setExpense} onSubmit={onSubmit} />,
-      );
-    });
-    it('should render receipt value field when chose currency', () => {
-      component = render(
         <NewExpense
-          expense={{ ...emptyExpenseMock, currency: 'BRL' }}
+          expense={emptyExpenseMock}
           setExpense={setExpense}
           onSubmit={onSubmit}
+          onCancel={onCancel}
         />,
       );
-
-      const receiptValue = component.getByTestId('new-expense__receipt-value');
-      expect(receiptValue).not.toBeNull();
     });
 
-    it('should render to be paid field when chose currency', () => {
-      component = render(
-        <NewExpense
-          expense={{ ...emptyExpenseMock, currency: 'BRL' }}
-          setExpense={setExpense}
-          onSubmit={onSubmit}
-        />,
-      );
-
-      const receiptValue = component.getByTestId('new-expense__value-to-be-paid');
-      expect(receiptValue).not.toBeNull();
+    afterEach(() => {
+      cleanup();
     });
 
     it('should set new expense on selecting file ', () => {
@@ -78,15 +61,15 @@ describe('NewExpenseComponent', () => {
       const fileInput = component.getByTestId('new-expense__file');
       fireEvent.change(fileInput, { target: { files: [invalidFile] } });
 
-      expect(setExpense).toHaveBeenCalledWith({ ...emptyExpenseMock, receiptImage: { error: 'Arquivo deve ser .jpg ou .png', file: null } });
+      expect(setExpense).toHaveBeenCalledWith({ ...emptyExpenseMock, receiptImage: { error: 'File must be .jpg or .png', file: null } });
     });
 
-    it('should file erro when file is not a .png or .jpg ', () => {
+    it('should file erro when file is bigger than 1MB', () => {
       const invalidFile = { ...fileMock.file, size: 2048576 };
       const fileInput = component.getByTestId('new-expense__file');
       fireEvent.change(fileInput, { target: { files: [invalidFile] } });
 
-      expect(setExpense).toHaveBeenCalledWith({ ...emptyExpenseMock, receiptImage: { error: 'Tamanho da imagem deve ser menor que 1MB', file: null } });
+      expect(setExpense).toHaveBeenCalledWith({ ...emptyExpenseMock, receiptImage: { error: 'File exceeds the max size of 1MB, please choose another file', file: null } });
     });
 
     it('should set new expense on change expense type ', () => {
@@ -118,33 +101,17 @@ describe('NewExpenseComponent', () => {
     });
 
     it('should set new expense on change receipt value ', () => {
-      component = render(
-        <NewExpense
-          expense={{ ...emptyExpenseMock, currency: 'BRL' }}
-          setExpense={setExpense}
-          onSubmit={onSubmit}
-        />,
-      );
-
       const receiptValueInput = component.getByTestId('new-expense__receipt-value');
       fireEvent.change(receiptValueInput, { target: { value: '1616.16' } });
 
-      expect(setExpense).toHaveBeenCalledWith({ ...emptyExpenseMock, currency: 'BRL', receiptValue: '1616.16' });
+      expect(setExpense).toHaveBeenCalledWith({ ...emptyExpenseMock, receiptValue: '1616.16' });
     });
 
     it('should set new expense on change value to be paid', () => {
-      component = render(
-        <NewExpense
-          expense={{ ...emptyExpenseMock, currency: 'BRL' }}
-          setExpense={setExpense}
-          onSubmit={onSubmit}
-        />,
-      );
-
       const valueToBePaidInput = component.getByTestId('new-expense__value-to-be-paid');
       fireEvent.change(valueToBePaidInput, { target: { value: '100.16' } });
 
-      expect(setExpense).toHaveBeenCalledWith({ ...emptyExpenseMock, currency: 'BRL', valueToBePaid: '100.16' });
+      expect(setExpense).toHaveBeenCalledWith({ ...emptyExpenseMock, valueToBePaid: '100.16' });
     });
 
     it('should save new expense', () => {
@@ -157,24 +124,11 @@ describe('NewExpenseComponent', () => {
   });
 
   describe('Snapshot tests', () => {
-    it('should render new expense component without conditional fields', () => {
-      const expenseMock = {
-        expenseType: 'food',
-        currency: '',
-        description: 'description',
-        receiptDate: '2020-10-10',
-        receiptValue: '',
-        valueToBePaid: '',
-        receiptImage: fileMock,
-      };
-      component = render(
-        <NewExpense expense={expenseMock} setExpense={setExpense} onSubmit={onSubmit} />,
-      );
-
-      expect(pretty(component.container.innerHTML)).toMatchSnapshot();
+    afterEach(() => {
+      cleanup();
     });
 
-    it('should render new expense component with conditional fields', () => {
+    it('should render new expense component without conditional fields', () => {
       const expenseMock = {
         expenseType: 'food',
         currency: 'BRL',
@@ -184,8 +138,40 @@ describe('NewExpenseComponent', () => {
         valueToBePaid: '10',
         receiptImage: fileMock,
       };
+      cleanup();
       component = render(
-        <NewExpense expense={expenseMock} setExpense={setExpense} onSubmit={onSubmit} />,
+        <NewExpense
+          expense={expenseMock}
+          setExpense={setExpense}
+          onSubmit={onSubmit}
+          onCancel={onCancel}
+        />,
+      );
+
+      expect(pretty(component.container.innerHTML)).toMatchSnapshot();
+    });
+
+    it('should render new expense component with conditional fields', () => {
+      const expenseMock = {
+        expenseType: 'food',
+        currency: '',
+        description: 'description',
+        receiptDate: '2020-10-10',
+        receiptValue: '',
+        valueToBePaid: '',
+        receiptImage: {
+          file: null,
+          error: 'error on file',
+        },
+      };
+      cleanup();
+      component = render(
+        <NewExpense
+          expense={expenseMock}
+          setExpense={setExpense}
+          onSubmit={onSubmit}
+          onCancel={onCancel}
+        />,
       );
 
       const input = component.getByTestId('new-expense__currency-select');
