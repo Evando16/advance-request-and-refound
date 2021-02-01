@@ -10,17 +10,49 @@ import PropTypes from 'prop-types';
 const TimelineContainier = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   border-radius: 6px;
   background-color: #fff;
-  padding: 24px;
-  margin-bottom: 24px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  
+  @media screen and (max-width: 959px) {
+    flex-direction: column;
+  }
+  
+`;
+
+const TimelineSubContainier = styled.div`
+  display: flex;
+  flex-grow: 1;
+  min-width: 50%;
+  
+  @media screen and (min-width: 600px) and (max-width: 959px) {
+    margin: ${(props) => props.margin};
+    min-width: unset;
+  }
+
+  @media screen and (max-width: 599px) {
+    flex-direction: column;    
+  }
 `;
 
 const TimelineQuadrant = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: ${(props) => props.width}
+  width: ${(props) => props.width};
+  min-width: ${(props) => props.minWidth};
+  margin-right: 1rem;
+
+  @media screen and (min-width: 600px) and (max-width: 959px) {
+    width: ${(props) => props.widthSm};
+  }
+
+  @media screen and (max-width: 599px) {
+    width: unset;
+    margin-bottom: 0.625rem;
+  }
 `;
 
 const TimelineIdentificationQuadrant = styled(TimelineQuadrant)`
@@ -32,16 +64,20 @@ const TimelineQuadrantReceipt = styled.div`
   display: flex;
   flex-direction: row;
   place-content: center;
-  flex: 1 1 0%;
+  flex-grow: 2;
   font-size: .875rem;
   color: #51c1c3;
   align-items: center;
+
+  @media screen and (max-width: 599px) {
+    place-content: start;
+  }
 `;
 
 const TimelineReceiptLink = styled.a`
   color: #51c1c3;
   text-decoration: none;
-  margin-left: 8px;
+  margin-left: .5rem;
 `;
 
 const TimelineIcon = styled(FontAwesomeIcon)`
@@ -57,7 +93,7 @@ const TimelineLabel = styled.span`
   font-size: .75rem;
   font-weight: 700;
   color: #d0d3d6;
-  margin-bottom: 8px;
+  margin-bottom: .5rem;
 `;
 
 const TimelineDesription = styled.span`
@@ -72,19 +108,19 @@ const TimelineSubDescription = styled.span`
 `;
 
 const TimelineCurrencyLabel = styled.span`
-  margin-right: 8px;
+  margin-right: .5rem;
 `;
 const TimelineStatus = styled.span`
   font-size: .875rem;
   text-align: center;
   font-weight: 700;
   color: ${(props) => props.color};
-  width: 65%;
   border-radius: 18px;
   border: ${(props) => props.border};
   background-color: ${(props) => props.backgroundcolor};
-  margin-bottom: 8px;
-  padding: 8px 0;
+  margin-bottom: .5rem;
+  padding: .5rem 0;
+  min-width: 150px;
 `;
 
 function getStatusStyle(status) {
@@ -136,44 +172,48 @@ export default function Timeline({ timelineData }) {
   return (
     timelineData.map((item) => (
       <TimelineContainier key={item.id}>
-        <TimelineIdentificationQuadrant width="12%">
-          <TimelineIcon icon={getCardIcon(item)} {...getIconColor(item.cardType)} />
-          <TimelineSubDescription>{item.cardDate}</TimelineSubDescription>
-        </TimelineIdentificationQuadrant>
-        <TimelineQuadrant width="35%">
-          <TimelineLabel>ACTION</TimelineLabel>
-          <TimelineDesription>{item.typeDescription}</TimelineDesription>
-        </TimelineQuadrant>
-        {item.amountSpent !== '0' && item.amountTotal !== '0'
-          && (
-            <TimelineQuadrant width="20%">
-              <TimelineLabel>VALUE</TimelineLabel>
-              <TimelineDesription>
-                <TimelineCurrencyLabel>{item.currencyCode}</TimelineCurrencyLabel>
-                <span>{item.amountSpent}</span>
-              </TimelineDesription>
+        <TimelineSubContainier>
+          <TimelineIdentificationQuadrant width="12%" widthSm="17%">
+            <TimelineIcon icon={getCardIcon(item)} {...getIconColor(item.cardType)} />
+            <TimelineSubDescription>{item.cardDate}</TimelineSubDescription>
+          </TimelineIdentificationQuadrant>
+          <TimelineQuadrant minWidth="35%">
+            <TimelineLabel>ACTION</TimelineLabel>
+            <TimelineDesription>{item.typeDescription}</TimelineDesription>
+          </TimelineQuadrant>
+          {item.amountSpent !== '0' && item.amountTotal !== '0'
+            && (
+              <TimelineQuadrant width="20%">
+                <TimelineLabel>VALUE</TimelineLabel>
+                <TimelineDesription>
+                  <TimelineCurrencyLabel>{item.currencyCode}</TimelineCurrencyLabel>
+                  <span>{item.amountSpent}</span>
+                </TimelineDesription>
 
-              <TimelineSubDescription>
-                <TimelineCurrencyLabel>Receipt total value:</TimelineCurrencyLabel>
-                <TimelineCurrencyLabel>{item.currencyCode}</TimelineCurrencyLabel>
-                <span>{item.amountTotal}</span>
-              </TimelineSubDescription>
-            </TimelineQuadrant>
+                <TimelineSubDescription>
+                  <TimelineCurrencyLabel>Receipt total value:</TimelineCurrencyLabel>
+                  <TimelineCurrencyLabel>{item.currencyCode}</TimelineCurrencyLabel>
+                  <span>{item.amountTotal}</span>
+                </TimelineSubDescription>
+              </TimelineQuadrant>
+            )}
+        </TimelineSubContainier>
+        <TimelineSubContainier margin="1rem 0 0 0">
+          {item.status
+            && (
+              <TimelineQuadrant width="15%">
+                <TimelineLabel>STATUS</TimelineLabel>
+                <TimelineStatus {...getStatusStyle(item.status)}>{item.status}</TimelineStatus>
+                <TimelineSubDescription>{item.notes}</TimelineSubDescription>
+              </TimelineQuadrant>
+            )}
+          {item.resourceUrl && (
+            <TimelineQuadrantReceipt>
+              <FontAwesomeIcon icon={faReceipt} />
+              <TimelineReceiptLink href={item.resourceUrl}>Receipt</TimelineReceiptLink>
+            </TimelineQuadrantReceipt>
           )}
-        {item.status
-          && (
-            <TimelineQuadrant width="15%">
-              <TimelineLabel>STATUS</TimelineLabel>
-              <TimelineStatus {...getStatusStyle(item.status)}>{item.status}</TimelineStatus>
-              <TimelineSubDescription>{item.notes}</TimelineSubDescription>
-            </TimelineQuadrant>
-          )}
-        {item.resourceUrl && (
-          <TimelineQuadrantReceipt>
-            <FontAwesomeIcon icon={faReceipt} />
-            <TimelineReceiptLink href={item.resourceUrl}>Receipt</TimelineReceiptLink>
-          </TimelineQuadrantReceipt>
-        )}
+        </TimelineSubContainier>
       </TimelineContainier>
     ))
   );
