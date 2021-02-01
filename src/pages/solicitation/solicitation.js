@@ -15,17 +15,29 @@ const SolicitationContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media screen and (max-width: 1279px) {
+    flex-direction: column;
+  }
 `;
 
 const SolicitationContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 72%;
+
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+  }
 `;
 
 const SolicitationSidebar = styled.div`
   display: flex;
   width: 25%;
+
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -38,10 +50,10 @@ const NewExpenseButton = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 15%;
+  min-width: 200px;
   font-size: 1rem;
-  padding: 1vh 0;
-  margin: 2vh 0;
+  padding: 1rem 1rem;
+  margin: 1.5rem 0;
   color: #6b7480;
   background-color: #fff;
   border-radius: 6px;
