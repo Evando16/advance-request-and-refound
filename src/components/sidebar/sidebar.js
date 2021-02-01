@@ -8,14 +8,16 @@ const SidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  padding: 24px 16px;
+  padding: 1.5rem 1rem;
   width: 100%;
 `;
 
 const SidebarItem = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 32px;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #6b7480;
 `;
 
 const SidebarStatus = styled.div`
@@ -27,7 +29,7 @@ const SidebarStatus = styled.div`
   border-radius: 6px;
   background-color: ${(props) => props.backgroundcolor};
   padding: 16px 0;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 `;
 
 const SidebarStatusLabel = styled.span`
@@ -47,7 +49,7 @@ const SidebarBalance = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
   border-bottom: 1px solid #f0f3f7;
 `;
 
@@ -60,7 +62,12 @@ const SidebarDetails = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
+
+  @media screen and (max-width: 599px) {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
 `;
 
 const SidebarDetailsItem = styled.div`  
