@@ -27,6 +27,35 @@ const SolicitationSidebar = styled.div`
   background-color: #fff;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+`;
+
+const NewExpenseButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 15%;
+  font-size: 1rem;
+  padding: 1vh 0;
+  margin: 2vh 0;
+  color: #6b7480;
+  background-color: #fff;
+  border-radius: 6px;
+  border: solid 1px #6b7480;
+  cursor: pointer;
+  
+  &:focus {
+    outline: none;
+  }
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  margin-right: 5%;
+`;
+
 export function saveNewExpense(expense) {
   saveExpense(expense)
     .then(() => {
@@ -92,10 +121,12 @@ export default function Solicitation() {
               setHeaderData={setHeaderData}
             />
           )}
-        <button type="button" onClick={toggleNewExpense}>
-          <FontAwesomeIcon icon={faReceipt} />
-          Adicionar Despesa
-        </button>
+        <ButtonContainer>
+          <NewExpenseButton type="button" onClick={toggleNewExpense}>
+            <Icon icon={faReceipt} />
+            Adicionar Despesa
+          </NewExpenseButton>
+        </ButtonContainer>
         {showNewExpense
           && (
             <NewExpense
