@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { EXPENSE_API_ROUTE, HEADER_API_ROUTE, SIDEBAR_API_ROUTE, TIMELINE_API_ROUTE } from '../../shared/api-constants';
+import {
+  EXPENSE_API_ROUTE, HEADER_API_ROUTE, SIDEBAR_API_ROUTE, TIMELINE_API_ROUTE,
+} from '../../shared/api-constants';
 import formatCurrency from '../../shared/utils/currency';
 import parseDate from '../../shared/utils/date';
 import parseToPascalCase from '../../shared/utils/text';

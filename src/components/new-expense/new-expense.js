@@ -120,7 +120,6 @@ const NewExpenseSpanFieldTitle = styled.span`
 const NewExpenseField = styled.label`
   display: flex;
   flex-direction: column;
-  margin-bottom: 1%;
   font-size: 1rem;
   font-weight: 700;
   color: #343a42;
@@ -129,7 +128,7 @@ const NewExpenseField = styled.label`
 `;
 
 const NewExpenseFieldLabel = styled.span`
-  margin-bottom: 1%;
+  margin: ${(props) => (props.margin ? props.margin : '')};
 `;
 
 const NewExpenseFieldContainer = styled.div`
@@ -251,8 +250,8 @@ export default function NewExpense({
             </NewExpenseFile>
           </NewExpenseFileContainer>
           <NewExpenseFieldContainer>
-            <NewExpenseField htmlFor="new-expense__type-selec">
-              <NewExpenseFieldLabel>Type*</NewExpenseFieldLabel>
+            <NewExpenseField htmlFor="new-expense__type-selec" margin="0 0 16px 0">
+              <NewExpenseFieldLabel margin="0 0 8px 0">Type*</NewExpenseFieldLabel>
               <NewExpenseSelectField
                 id="new-expense__type-select"
                 data-testid="new-expense__type-select"
@@ -270,8 +269,8 @@ export default function NewExpense({
                 ))}
               </NewExpenseSelectField>
             </NewExpenseField>
-            <NewExpenseField htmlFor="new-expense__description">
-              <NewExpenseFieldLabel>Expense description*</NewExpenseFieldLabel>
+            <NewExpenseField htmlFor="new-expense__description" margin="0 0 16px 0">
+              <NewExpenseFieldLabel margin="0 0 8px 0">Expense description*</NewExpenseFieldLabel>
               <NewExpenseInputField
                 required
                 id="new-expense__description"
@@ -280,8 +279,8 @@ export default function NewExpense({
                 onChange={onChangeDescription}
               />
             </NewExpenseField>
-            <NewExpenseField htmlFor="new-expense__receipt-date">
-              <NewExpenseFieldLabel>Receipt date*</NewExpenseFieldLabel>
+            <NewExpenseField htmlFor="new-expense__receipt-date" margin="0 0 16px 0">
+              <NewExpenseFieldLabel margin="0 0 8px 0">Receipt date*</NewExpenseFieldLabel>
               <NewExpenseInputField
                 required
                 id="new-expense__receipt-date"
@@ -294,8 +293,8 @@ export default function NewExpense({
                 max="2077-01-01"
               />
             </NewExpenseField>
-            <NewExpenseField htmlFor="new-expense__currency-select">
-              <NewExpenseFieldLabel>Currency*</NewExpenseFieldLabel>
+            <NewExpenseField htmlFor="new-expense__currency-select" margin="0 0 16px 0">
+              <NewExpenseFieldLabel margin="0 0 8px 0">Currency*</NewExpenseFieldLabel>
               <NewExpenseSelectField
                 required
                 data-testid="new-expense__currency-select"
@@ -327,7 +326,7 @@ export default function NewExpense({
                 />
               </NewExpenseField>
               <NewExpenseField htmlFor="new-expense__value-to-be-paid" flexGrow="1">
-                <NewExpenseFieldLabel>Value to be considered</NewExpenseFieldLabel>
+                <NewExpenseFieldLabel>Value to be considered*</NewExpenseFieldLabel>
                 <NewExpenseInputField
                   id="new-expense__value-to-be-paid"
                   data-testid="new-expense__value-to-be-paid"
