@@ -20,13 +20,14 @@ const NewExpenseContainer = styled.div`
   background-color: #fafbfc;
   box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
   border-radius: 6px;
+  margin-bottom: 1.5rem;
 `;
 
 const NewExpenseTitle = styled.span`
   color: #353a40;
   font-size: 1.25rem;
   font-weight: 700;
-  margin: 3% 0 0 3%;
+  margin: 0 0 0 3%;
 `;
 
 const NewExpenseForm = styled.form`
@@ -40,6 +41,10 @@ const NewExpenseFormActions = styled.div`
   margin-top: 16px;
   padding: 2% 3%;
   background-color: #fff;
+
+  @media (max-width: 599px) {
+    place-content: space-around;
+  }
 `;
 
 const NewExpenseFormButton = styled.button`
@@ -63,7 +68,10 @@ const NewExpenseFormCancelButton = styled(NewExpenseFormButton)`
   color: #6b7480;
   background-color: #fff;
   border: 1px solid #6b7480;
-  margin-right: 24px;
+  
+  @media (min-width: 599px) {
+    margin-right: 24px;
+  }
 `;
 
 const NewExpenseFileContainer = styled.div`
@@ -73,6 +81,12 @@ const NewExpenseFileContainer = styled.div`
   background-color: #fff;
   place-content: center;
   align-items: center;
+
+    
+  @media (max-width: 599px) {
+    width: unset;
+    margin-bottom: 1rem;
+  }
 `;
 
 const NewExpenseFile = styled.div`
@@ -95,19 +109,18 @@ const NewExpenseFileButton = styled.label`
 
 const NewExpenseHint = styled.span`
   font-size: .75rem;
-  color: #848a91;
-`;
-
-const NewExpenseFileError = styled.span`
-  font-size: 1rem;
-  color: #f44336;
+  color: ${(props) => (props.color ? props.color : '#848a91')};
 `;
 
 const NewExpenseContent = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 3%;
+  margin: 1rem 3% 0 3%;
+
+  @media (max-width: 599px) {
+    flex-direction: column;
+  }
 `;
 
 const NewExpenseSpanFieldTitle = styled.span`
@@ -123,18 +136,22 @@ const NewExpenseField = styled.label`
   font-size: 1rem;
   font-weight: 700;
   color: #343a42;
-  flex-grow: ${(props) => props.flexGrow};
   margin: ${(props) => props.margin};
+  width: ${(props) => props.width};
 `;
 
 const NewExpenseFieldLabel = styled.span`
   margin: ${(props) => props.margin};
 `;
 
-const NewExpenseFieldContainer = styled.div`
+const NewExpenseFieldsContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 48%;
+  
+  @media (max-width: 599px) {
+    width: unset;
+  }
 `;
 
 const NewExpenseSelectField = styled.select`
@@ -175,6 +192,7 @@ const NewExpenseInputField = styled.input`
 const NewExpenseCurrencyInfoFieldContainier = styled.div`
   display: flex;
   flex-direction: row;
+  place-content: space-between;
 `;
 
 // TODO improve cancel action (if there is data)
@@ -246,10 +264,10 @@ export default function NewExpense({
               </NewExpenseFileButton>
               <NewExpenseHint>Just JPG or PNG images are accepted</NewExpenseHint>
               {!!expense.receiptImage.error
-                && <NewExpenseFileError>{expense.receiptImage.error}</NewExpenseFileError>}
+                && <NewExpenseHint color="#f44336">{expense.receiptImage.error}</NewExpenseHint>}
             </NewExpenseFile>
           </NewExpenseFileContainer>
-          <NewExpenseFieldContainer>
+          <NewExpenseFieldsContainer>
             <NewExpenseField htmlFor="new-expense__type-selec" margin="0 0 16px 0">
               <NewExpenseFieldLabel margin="0 0 8px 0">Type*</NewExpenseFieldLabel>
               <NewExpenseSelectField
@@ -313,8 +331,8 @@ export default function NewExpense({
               </NewExpenseSelectField>
             </NewExpenseField>
             <NewExpenseCurrencyInfoFieldContainier>
-              <NewExpenseField htmlFor="new-expense__receipt-value" flexGrow="1" margin="0 24px 0 0">
-                <NewExpenseFieldLabel>Receipt value*</NewExpenseFieldLabel>
+              <NewExpenseField htmlFor="new-expense__receipt-value" width="45%">
+                <NewExpenseFieldLabel margin="0 0 8px 0">Receipt value*</NewExpenseFieldLabel>
                 <NewExpenseInputField
                   id="new-expense__receipt-value"
                   data-testid="new-expense__receipt-value"
@@ -325,8 +343,8 @@ export default function NewExpense({
                   onChange={onChangeReceiptValue}
                 />
               </NewExpenseField>
-              <NewExpenseField htmlFor="new-expense__value-to-be-paid" flexGrow="1">
-                <NewExpenseFieldLabel>Value to be considered*</NewExpenseFieldLabel>
+              <NewExpenseField htmlFor="new-expense__value-to-be-paid" width="45%">
+                <NewExpenseFieldLabel margin="0 0 8px 0">To be paid value*</NewExpenseFieldLabel>
                 <NewExpenseInputField
                   id="new-expense__value-to-be-paid"
                   data-testid="new-expense__value-to-be-paid"
@@ -338,7 +356,7 @@ export default function NewExpense({
                 />
               </NewExpenseField>
             </NewExpenseCurrencyInfoFieldContainier>
-          </NewExpenseFieldContainer>
+          </NewExpenseFieldsContainer>
         </NewExpenseContent>
         <NewExpenseFormActions>
           <NewExpenseFormCancelButton
