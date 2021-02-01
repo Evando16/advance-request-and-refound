@@ -83,6 +83,7 @@ const TimelineStatus = styled.span`
   border: ${(props) => props.border};
   background-color: ${(props) => props.backgroundcolor};
   margin-bottom: 8px;
+  padding: 8px 0;
 `;
 
 function getStatusStyle(status) {
@@ -90,10 +91,10 @@ function getStatusStyle(status) {
     case 'APPROVED':
       return { backgroundcolor: '#ecf8f8', color: '#03a046', border: '1px solid #03a046' };
     case 'PENDING':
-      return { backgroundcolor: '#ecf8f8', color: '#03a046', border: '1px solid #03a046' };
+      return { backgroundcolor: '#f0f3f7', color: '#053d4e', border: '1px solid #053d4e' };
     case 'CANCELLED':
     default:
-      return { backgroundcolor: '#ecf8f8', color: '#03a046', border: '1px solid #03a046' };
+      return { backgroundcolor: '#fde2e0', color: '#f44336', border: '1px solid #f44336' };
   }
 }
 
