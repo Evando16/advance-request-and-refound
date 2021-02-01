@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NewExpenseComponent Snapshot tests should render new expense component with conditional fields 1`] = `
-"<div class=\\"NewExpenseContainer-hqtosb fQodiH\\">
+"<div class=\\"NewExpenseContainer-hqtosb bIlGxv\\">
   <form class=\\"NewExpenseForm-cwuXvK kEHXvR\\"><span class=\\"NewExpenseTitle-lhcAMw izgqkw\\">New expense</span>
     <div class=\\"NewExpenseContent-jatTpR igkCMt\\">
       <div class=\\"NewExpenseFileContainer-bNEBXl iQMOdn\\">
-        <div class=\\"NewExpenseFile-kZrDhS ldnNcp\\"><span class=\\"NewExpenseSpanFieldTitle-fryOLC eNcQVo\\">Receipt or invoice*</span><label for=\\"new-expense__file\\" class=\\"NewExpenseFileButton-doqqYw dmgrQy\\"><span>Select file</span><input id=\\"new-expense__file\\" data-testid=\\"new-expense__file\\" style=\\"display: none;\\" accept=\\".jpg,.png\\" type=\\"file\\"></label><span class=\\"NewExpenseHint-gvuMzb jclQCg\\">Just JPG or PNG images are accepted</span><span class=\\"NewExpenseFileError-fBCPIy kKfiPX\\">error on file</span></div>
+        <div class=\\"NewExpenseFile-kZrDhS ldnNcp\\"><span class=\\"NewExpenseSpanFieldTitle-fryOLC eNcQVo\\">Receipt or invoice*</span><label for=\\"new-expense__file\\" class=\\"NewExpenseFileButton-doqqYw dmgrQy\\"><span>Select file</span><input id=\\"new-expense__file\\" data-testid=\\"new-expense__file\\" style=\\"display: none;\\" accept=\\".jpg,.png\\" type=\\"file\\"></label><span class=\\"NewExpenseHint-gvuMzb bCQsrY\\">Just JPG or PNG images are accepted</span><span class=\\"NewExpenseFileError-fBCPIy kKfiPX\\">error on file</span></div>
       </div>
       <div class=\\"NewExpenseFieldContainer-kGZLx MECNd\\"><label for=\\"new-expense__type-selec\\" class=\\"NewExpenseField-juMRoK ikkiUV\\"><span class=\\"NewExpenseFieldLabel-iRoKGQ keXWMB\\">Type*</span><select id=\\"new-expense__type-select\\" data-testid=\\"new-expense__type-select\\" required=\\"\\" class=\\"NewExpenseSelectField-jVTKdO iFJTld\\">
             <option value=\\"\\" class=\\"NewExpenseSelectOption-coaVTX eLEIqd\\"></option>
@@ -27,11 +27,11 @@ exports[`NewExpenseComponent Snapshot tests should render new expense component 
 `;
 
 exports[`NewExpenseComponent Snapshot tests should render new expense component without conditional fields 1`] = `
-"<div class=\\"NewExpenseContainer-hqtosb fQodiH\\">
+"<div class=\\"NewExpenseContainer-hqtosb bIlGxv\\">
   <form class=\\"NewExpenseForm-cwuXvK kEHXvR\\"><span class=\\"NewExpenseTitle-lhcAMw izgqkw\\">New expense</span>
     <div class=\\"NewExpenseContent-jatTpR igkCMt\\">
       <div class=\\"NewExpenseFileContainer-bNEBXl iQMOdn\\">
-        <div class=\\"NewExpenseFile-kZrDhS ldnNcp\\"><span class=\\"NewExpenseSpanFieldTitle-fryOLC eNcQVo\\">Receipt or invoice*</span><label for=\\"new-expense__file\\" class=\\"NewExpenseFileButton-doqqYw dmgrQy\\"><span>Select file</span><input id=\\"new-expense__file\\" data-testid=\\"new-expense__file\\" style=\\"display: none;\\" accept=\\".jpg,.png\\" type=\\"file\\"></label><span class=\\"NewExpenseHint-gvuMzb jclQCg\\">Just JPG or PNG images are accepted</span></div>
+        <div class=\\"NewExpenseFile-kZrDhS ldnNcp\\"><span class=\\"NewExpenseSpanFieldTitle-fryOLC eNcQVo\\">Receipt or invoice*</span><label for=\\"new-expense__file\\" class=\\"NewExpenseFileButton-doqqYw dmgrQy\\"><span>Select file</span><input id=\\"new-expense__file\\" data-testid=\\"new-expense__file\\" style=\\"display: none;\\" accept=\\".jpg,.png\\" type=\\"file\\"></label><span class=\\"NewExpenseHint-gvuMzb bCQsrY\\">Just JPG or PNG images are accepted</span></div>
       </div>
       <div class=\\"NewExpenseFieldContainer-kGZLx MECNd\\"><label for=\\"new-expense__type-selec\\" class=\\"NewExpenseField-juMRoK ikkiUV\\"><span class=\\"NewExpenseFieldLabel-iRoKGQ keXWMB\\">Type*</span><select id=\\"new-expense__type-select\\" data-testid=\\"new-expense__type-select\\" required=\\"\\" class=\\"NewExpenseSelectField-jVTKdO iFJTld\\">
             <option value=\\"\\" class=\\"NewExpenseSelectOption-coaVTX eLEIqd\\"></option>

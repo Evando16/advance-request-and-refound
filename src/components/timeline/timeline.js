@@ -13,6 +13,7 @@ const TimelineContainier = styled.div`
   border-radius: 6px;
   background-color: #fff;
   padding: 24px;
+  margin-bottom: 24px;
 `;
 
 const TimelineQuadrant = styled.div`
@@ -32,7 +33,7 @@ const TimelineQuadrantReceipt = styled.div`
   flex-direction: row;
   place-content: center;
   flex: 1 1 0%;
-  font-size: 0.875rem;
+  font-size: .875rem;
   color: #51c1c3;
   align-items: center;
 `;
@@ -53,7 +54,7 @@ const TimelineIcon = styled(FontAwesomeIcon)`
 `;
 
 const TimelineLabel = styled.span`
-  font-size: 0.75rem;
+  font-size: .75rem;
   font-weight: 700;
   color: #d0d3d6;
   margin-bottom: 8px;
@@ -66,7 +67,7 @@ const TimelineDesription = styled.span`
 `;
 
 const TimelineSubDescription = styled.span`
-  font-size: 0.875rem;
+  font-size: .875rem;
   color: #545b64;
 `;
 
@@ -74,7 +75,7 @@ const TimelineCurrencyLabel = styled.span`
   margin-right: 8px;
 `;
 const TimelineStatus = styled.span`
-  font-size: 0.875rem;
+  font-size: .875rem;
   text-align: center;
   font-weight: 700;
   color: ${(props) => props.color};
@@ -134,7 +135,7 @@ export function getCardIcon(timeLineItem) {
 export default function Timeline({ timelineData }) {
   return (
     timelineData.map((item) => (
-      <TimelineContainier key={item.id} style={{ marginTop: '24px', padding: '16px' }}>
+      <TimelineContainier key={item.id}>
         <TimelineIdentificationQuadrant width="12%">
           <TimelineIcon icon={getCardIcon(item)} {...getIconColor(item.cardType)} />
           <TimelineSubDescription>{item.cardDate}</TimelineSubDescription>

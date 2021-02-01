@@ -52,7 +52,7 @@ const SidebarBalance = styled.div`
 `;
 
 const SidebarBalanceLabel = styled.span`
-  font-size: 0.875rem;
+  font-size: .875rem;
   color: #6b7480;
   margin-bottom: 8px;
 `;
@@ -76,7 +76,7 @@ const SidebarDetailsIcon = styled(FontAwesomeIcon)`
 `;
 
 const SidebarLabel = styled.span`
-  font-size: 0.75rem;
+  font-size: .75rem;
   color: #6b7480;
 `;
 
@@ -95,7 +95,7 @@ const SidebarStatementContainer = styled.div`
 `;
 
 const SidebarStatementTitile = styled.span` 
-  font-size: 0.875rem;
+  font-size: .875rem;
   font-weight: bold; 
   color: #353a40;
   border-bottom: 1px solid #f0f3f7;
@@ -107,7 +107,7 @@ const SidebarStatementHeader = styled.span`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-size: 0.75rem;
+  font-size: .75rem;
   color: #053d4e;
 `;
 
@@ -115,7 +115,7 @@ const SidebarStatementBody = styled.span`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-size: 0.875rem;
+  font-size: .875rem;
   font-weight: 700;
   color: #053d4e;
   margin-top: 8px;

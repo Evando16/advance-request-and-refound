@@ -9,20 +9,28 @@ const HeaderContainer = styled.div`
   flex-direction: column;
   background-image: linear-gradient(to right, #00d7ce 3%, #00c5fc);
   border-radius: 12px;
-  padding: 2% 4%;
+  padding: 1rem;
   color: #fff;
 `;
 
-const HeaderTyle = styled.div`
+const HeaderTitle = styled.div`
   font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 1%;
+  margin-bottom: 1rem;
+`;
+
+const HeaderTitleItem = styled.span`
+  margin: ${(props) => (props.margin)};
 `;
 
 const HeaderContent = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media screen and (max-width: 959px) {
+    flex-direction: column;
+  }
 `;
 
 const HeaderQuadrant = styled.div`
@@ -30,26 +38,63 @@ const HeaderQuadrant = styled.div`
   flex-direction: column;
   max-width: 33%;
   flex-grow : 1;
+  
+  @media screen and (max-width: 959px) {
+    max-width: 100%;
+  }
 `;
 
 const HeaderQuadrantItem = styled.div`
   display: flex;
+  
+  @media screen and (max-width: 959px) {
+    flex-grow: 0;
+    min-width: 50%;
+  }
+`;
+
+const HeaderQuadrantEventInfo = styled(HeaderQuadrant)` 
+  @media screen and (max-width: 959px) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
 `;
 
 const HeaderInfoCostCenterQuadrant = styled(HeaderQuadrant)`
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
+
+  @media screen and (max-width: 959px) {
+    padding: 1rem 0;
+    margin: 1rem 0;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+  }
 `;
 
 const HeaderText = styled.span`
-  font-size: 0.875rem;
+  font-size: .875rem;
 `;
 
 const HeaderLabel = styled(HeaderText)`
   font-weight: 400;
-  margin-right: 1vw;
-  text-align: ${(props) => (props.textAling ? props.textAling : 'start')};
-  width: ${(props) => props.width};
+  margin-right: 1rem;
+  width: ${(props) => props.widthXl};
+
+  @media screen and (min-width: 1280px) and (max-width: 1919px) {
+    width: ${(props) => props.widthLg};
+  }
+
+  @media screen and (min-width: 960px) and (max-width: 1279px) {
+    width: ${(props) => props.widthMd};
+  }
+
+  @media (max-width: 599px) {
+    width: unset;
+  }
 `;
 
 const HeaderData = styled(HeaderText)`
@@ -67,51 +112,54 @@ const HeaderCenterData = styled.div`
   flex-direction: column;
   align-self: center;
   align-items: ${(props) => (props.alignItems ? props.alignItems : 'start')};
-  padding-left: ${(props) => props.paddingLeft};
+
+  @media screen and (min-width: 960px) {
+    padding-left: ${(props) => props.paddingLeft};
+  }
 `;
 
 const Icon = styled(FontAwesomeIcon)`
   font-size: 1.5rem;
-  margin-bottom: 3%;
+  margin-bottom: 1rem;
 `;
 
 export default function Header({ headerData }) {
   return (
     <HeaderContainer>
-      <HeaderTyle>
-        <span>{headerData.type}</span>
-        <span>-</span>
-        <span>{headerData.purpose}</span>
-        <span>
+      <HeaderTitle>
+        <HeaderTitleItem margin="0 .625rem 0 0">{headerData.type}</HeaderTitleItem>
+        <HeaderTitleItem margin="0 .625rem 0 0">-</HeaderTitleItem>
+        <HeaderTitleItem margin="0 .625rem 0 0">{headerData.purpose}</HeaderTitleItem>
+        <HeaderTitleItem>
           #
           {headerData.id}
-        </span>
-      </HeaderTyle>
+        </HeaderTitleItem>
+      </HeaderTitle>
       <HeaderContent>
-        <HeaderQuadrant>
+        <HeaderQuadrantEventInfo>
           <HeaderQuadrantItem>
-            <HeaderLabel textAling="end" width="14%">Justification</HeaderLabel>
+            <HeaderLabel widthXl="19%" widthLg="30%" widthMd="25%">Justification</HeaderLabel>
             <HeaderData>{headerData.justification}</HeaderData>
           </HeaderQuadrantItem>
           <HeaderQuadrantItem>
-            <HeaderLabel textAling="end" width="14%">Finality</HeaderLabel>
+            <HeaderLabel widthXl="19%" widthLg="30%" widthMd="25%">Finality</HeaderLabel>
             <HeaderData>{headerData.purpose}</HeaderData>
           </HeaderQuadrantItem>
           <HeaderQuadrantItem>
-            <HeaderLabel textAling="end" width="14%">Event date</HeaderLabel>
+            <HeaderLabel widthXl="19%" widthLg="30%" widthMd="25%">Event date</HeaderLabel>
             <HeaderData>{headerData.accountabilityExtraInfo.eventDate}</HeaderData>
           </HeaderQuadrantItem>
           <HeaderQuadrantItem>
-            <HeaderLabel textAling="end" width="14%">Amount</HeaderLabel>
+            <HeaderLabel widthXl="19%" widthLg="30%" widthMd="25%">Amount</HeaderLabel>
             <HeaderData>{headerData.accountabilityExtraInfo.amountOfPeople}</HeaderData>
           </HeaderQuadrantItem>
           <HeaderQuadrantItem>
-            <HeaderLabel textAling="end" width="14%">Project</HeaderLabel>
+            <HeaderLabel widthXl="19%" widthLg="30%" widthMd="25%">Project</HeaderLabel>
             {headerData.project
               ? <HeaderData>{headerData.project.title}</HeaderData>
               : <HeaderData>-</HeaderData>}
           </HeaderQuadrantItem>
-        </HeaderQuadrant>
+        </HeaderQuadrantEventInfo>
         <HeaderInfoCostCenterQuadrant>
           <HeaderCenterData>
             <HeaderLabel>Cost center</HeaderLabel>
