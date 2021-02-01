@@ -9,14 +9,14 @@ const HeaderContainer = styled.div`
   flex-direction: column;
   background-image: linear-gradient(to right, #00d7ce 3%, #00c5fc);
   border-radius: 12px;
-  padding: 24px 40px;
+  padding: 2% 4%;
   color: #fff;
 `;
 
 const HeaderTyle = styled.div`
   font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 2vh;
+  margin-bottom: 1%;
 `;
 
 const HeaderContent = styled.div`
@@ -58,7 +58,7 @@ const HeaderData = styled(HeaderText)`
 `;
 
 const HeaderDataCostCenter = styled.span`
-  font-size: 1ream;
+  font-size: 1rem;
   font-weight: 700;
 `;
 
@@ -67,10 +67,12 @@ const HeaderCenterData = styled.div`
   flex-direction: column;
   align-self: center;
   align-items: ${(props) => (props.alignItems ? props.alignItems : 'start')};
+  padding-left: ${(props) => (props.paddingLeft ? props.paddingLeft : '')};
 `;
 
 const Icon = styled(FontAwesomeIcon)`
   font-size: 1.5rem;
+  margin-bottom: 3%;
 `;
 
 export default function Header({ headerData }) {
@@ -124,7 +126,7 @@ export default function Header({ headerData }) {
           </HeaderCenterData>
         </HeaderInfoCostCenterQuadrant>
         <HeaderQuadrant>
-          <HeaderCenterData alignItems="center">
+          <HeaderCenterData alignItems="center" paddingLeft="8%">
             <Icon icon={faGraduationCap} />
             <HeaderData textAling="center">
               This solicitation will be paid by education / fraternization budget
