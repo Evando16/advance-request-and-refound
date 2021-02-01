@@ -20,12 +20,12 @@ const SolicitationContainer = styled.div`
 const SolicitationContent = styled.div`
   display: flex;
   flex-direction: column;
-  width: 77%;
+  width: 72%;
 `;
 
 const SolicitationSidebar = styled.div`
-  width: 20%;
-  background-color: #fff;
+  display: flex;
+  width: 25%;
 `;
 
 const ButtonContainer = styled.div`

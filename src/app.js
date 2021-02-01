@@ -6,7 +6,7 @@ import CustomSnackbar from './components/snackbar/snackbar';
 
 const GlobalStyle = createGlobalStyle`
 body {
-  padding: 0 2vw;
+  padding: 0 40px;
   margin: 0;
   background-color: #053d4e;
   font-family: 'Nunito Sans', sans-serif;
@@ -15,7 +15,7 @@ body {
 
 const AppContainer = styled.div`
   background-color: #f4f6fa;
-  padding: 4vh 1vw 0 1vw;
+  padding: 24px;
 `;
 
 export default function App() {

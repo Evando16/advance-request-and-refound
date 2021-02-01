@@ -31,7 +31,7 @@ const TimelineQuadrantReceipt = styled.div`
   display: flex;
   flex-direction: row;
   place-content: center;
-  flex: 1 1 0%
+  flex: 1 1 0%;
   font-size: 0.875rem;
   color: #51c1c3;
   align-items: center;
@@ -49,7 +49,7 @@ const TimelineIcon = styled(FontAwesomeIcon)`
   margin-bottom: 18px;
   border-radius: 50%;
   background-color: ${(props) => props.backgroundcolor};
-  color: ${(props) => props.color};;
+  color: ${(props) => props.color};
 `;
 
 const TimelineLabel = styled.span`
