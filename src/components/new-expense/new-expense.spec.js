@@ -4,8 +4,6 @@ import pretty from 'pretty';
 
 import NewExpense from './new-expense';
 
-jest.mock('./new-expense-service.js');
-
 describe('NewExpenseComponent', () => {
   const fileMock = {
     file: {

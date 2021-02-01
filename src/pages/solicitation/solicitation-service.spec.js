@@ -1,6 +1,10 @@
 import axios from 'axios';
-import { HEADER_API_ROUTE, SIDEBAR_API_ROUTE, TIMELINE_API_ROUTE } from '../../shared/api-constants';
-import { requestSidebarInfo, requestHeaderData, requestTimelineData } from './solicitation-service';
+import {
+  EXPENSE_API_ROUTE, HEADER_API_ROUTE, SIDEBAR_API_ROUTE, TIMELINE_API_ROUTE,
+} from '../../shared/api-constants';
+import {
+  requestSidebarInfo, requestHeaderData, requestTimelineData, saveExpense,
+} from './solicitation-service';
 
 jest.mock('axios');
 
@@ -135,6 +139,26 @@ describe('SolicitationService', () => {
     },
   ];
 
+  const newExpenseMock = {
+    expenseType: 'food',
+    currency: 'USD',
+    description: 'this is just a test',
+    receiptDate: '2015-01-20',
+    receiptValue: '1616.16',
+    valueToBePaid: '20.50',
+    receiptImage: { file: {} },
+  };
+
+  const expectedExpenseBody = {
+    expenseTypeCode: 'food',
+    currencyCode: 'USD',
+    notes: 'this is just a test',
+    cardDate: new Date('2015-01-20').getTime(),
+    amountTotal: 1616.16,
+    amountSpent: 20.50,
+    resourceUrl: {},
+  };
+
   describe('Unit tests', () => {
     it('should request header data', async () => {
       axios.get.mockResolvedValue({ data: headerDataHttpMock });
@@ -183,6 +207,20 @@ describe('SolicitationService', () => {
 
       await expect(requestSidebarInfo()).rejects.toThrow('Ops... Fail to recovery Sidebard data :(');
       expect(axios.get).toHaveBeenCalledWith(SIDEBAR_API_ROUTE);
+    });
+
+    it('should save a new expense', async () => {
+      axios.post.mockImplementation(() => Promise.resolve({ data: {} }));
+
+      await expect(saveExpense(newExpenseMock)).resolves.toEqual('Expense saved with success :)');
+      expect(axios.post).toHaveBeenCalledWith(EXPENSE_API_ROUTE, expectedExpenseBody);
+    });
+
+    it('should got fail to save a new expense', async () => {
+      axios.post.mockImplementation(() => Promise.reject(new Error('Ops... An error has occurred while save your new expense :(')));
+
+      await expect(saveExpense(newExpenseMock)).rejects.toThrow('Ops... An error has occurred while save your new expense :(');
+      expect(axios.post).toHaveBeenCalledWith(EXPENSE_API_ROUTE, expectedExpenseBody);
     });
   });
 });

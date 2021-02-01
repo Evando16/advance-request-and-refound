@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { HEADER_API_ROUTE, SIDEBAR_API_ROUTE, TIMELINE_API_ROUTE } from '../../shared/api-constants';
+import { EXPENSE_API_ROUTE, HEADER_API_ROUTE, SIDEBAR_API_ROUTE, TIMELINE_API_ROUTE } from '../../shared/api-constants';
 import formatCurrency from '../../shared/utils/currency';
 import parseDate from '../../shared/utils/date';
 import parseToPascalCase from '../../shared/utils/text';
@@ -105,4 +105,28 @@ export async function requestSidebarInfo() {
   return axios.get(SIDEBAR_API_ROUTE)
     .then((response) => Promise.resolve(parseSidebarInfo(response.data.content)))
     .catch(() => Promise.reject(new Error('Ops... Fail to recovery Sidebard data :(')));
+}
+
+export async function saveExpense({
+  expenseType,
+  currency,
+  description,
+  receiptDate,
+  receiptValue,
+  valueToBePaid,
+  receiptImage,
+}) {
+  const expense = {
+    expenseTypeCode: expenseType,
+    currencyCode: currency,
+    amountSpent: Number(valueToBePaid),
+    amountTotal: Number(receiptValue),
+    notes: description,
+    resourceUrl: receiptImage.file,
+    cardDate: new Date(receiptDate).getTime(),
+  };
+
+  return axios.post(EXPENSE_API_ROUTE, expense)
+    .then(() => Promise.resolve('Expense saved with success :)'))
+    .catch(() => Promise.reject(new Error('Ops... An error has occurred while save your new expense :(')));
 }

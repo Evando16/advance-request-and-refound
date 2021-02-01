@@ -7,8 +7,9 @@ import Header from '../../components/header/header';
 import Timeline from '../../components/timeline/timeline';
 import NewExpense from '../../components/new-expense/new-expense';
 import Sidebar from '../../components/sidebar/sidebar';
-import saveExpense from '../../components/new-expense/new-expense-service';
-import { requestSidebarInfo, requestHeaderData, requestTimelineData } from './solicitation-service';
+import {
+  requestSidebarInfo, requestHeaderData, requestTimelineData, saveExpense,
+} from './solicitation-service';
 
 const SolicitationContainer = styled.div`
   display: flex;
