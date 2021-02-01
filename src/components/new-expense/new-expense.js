@@ -123,12 +123,12 @@ const NewExpenseField = styled.label`
   font-size: 1rem;
   font-weight: 700;
   color: #343a42;
-  flex-grow: ${(props) => (props.flexGrow ? props.flexGrow : '')};
-  margin: ${(props) => (props.margin ? props.margin : '')};
+  flex-grow: ${(props) => props.flexGrow};
+  margin: ${(props) => props.margin};
 `;
 
 const NewExpenseFieldLabel = styled.span`
-  margin: ${(props) => (props.margin ? props.margin : '')};
+  margin: ${(props) => props.margin};
 `;
 
 const NewExpenseFieldContainer = styled.div`

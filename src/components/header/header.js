@@ -49,7 +49,7 @@ const HeaderLabel = styled(HeaderText)`
   font-weight: 400;
   margin-right: 1vw;
   text-align: ${(props) => (props.textAling ? props.textAling : 'start')};
-  width: ${(props) => (props.width ? props.width : '')};
+  width: ${(props) => props.width};
 `;
 
 const HeaderData = styled(HeaderText)`
@@ -67,7 +67,7 @@ const HeaderCenterData = styled.div`
   flex-direction: column;
   align-self: center;
   align-items: ${(props) => (props.alignItems ? props.alignItems : 'start')};
-  padding-left: ${(props) => (props.paddingLeft ? props.paddingLeft : '')};
+  padding-left: ${(props) => props.paddingLeft};
 `;
 
 const Icon = styled(FontAwesomeIcon)`

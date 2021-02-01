@@ -85,9 +85,9 @@ describe('SolicitationService', () => {
 
   const expectedTimelineData = [
     {
-      id: 545, cardDate: '04/01/2020', cardType: 'EXPENSE', typeDescription: 'Hotel', expenseTypeIcon: 'concierge-bell', resourceUrl: 'https://staging-backoffice-hotmart.s3.amazonaws.com/accountability/collaborator_6393359/accountability_742/expense_545_file_615_Captura%20de%20tela%20de%202019-11-24%2010-15-50.png', amountSpent: '11,11', amountTotal: '222,22', notes: 'sadasd', status: 'Pending',
+      id: 545, cardDate: '04/01/2020', cardType: 'EXPENSE', typeDescription: 'Hotel', expenseTypeIcon: 'concierge-bell', currencyCode: 'BRL', resourceUrl: 'https://staging-backoffice-hotmart.s3.amazonaws.com/accountability/collaborator_6393359/accountability_742/expense_545_file_615_Captura%20de%20tela%20de%202019-11-24%2010-15-50.png', amountSpent: '11,11', amountTotal: '222,22', notes: 'sadasd', status: 'Pending',
     }, {
-      id: 544, cardDate: '03/25/2020', cardType: 'EXPENSE', typeDescription: 'Food', expenseTypeIcon: 'utensils', resourceUrl: 'https://staging-backoffice-hotmart.s3.amazonaws.com/accountability/collaborator_6393359/accountability_742/expense_544_file_614_Captura%20de%20tela%20de%202019-11-21%2009-36-41.png', amountSpent: '1,11', amountTotal: '2,22', notes: 'dsfsdsffds', status: 'Pending',
+      id: 544, cardDate: '03/25/2020', cardType: 'EXPENSE', typeDescription: 'Food', expenseTypeIcon: 'utensils', currencyCode: 'BRL', resourceUrl: 'https://staging-backoffice-hotmart.s3.amazonaws.com/accountability/collaborator_6393359/accountability_742/expense_544_file_614_Captura%20de%20tela%20de%202019-11-21%2009-36-41.png', amountSpent: '1,11', amountTotal: '2,22', notes: 'dsfsdsffds', status: 'Pending',
     }, {
       id: 1374, cardDate: '03/24/2020', cardType: 'ACCOUNTABILITY_SUBMITTED', typeDescription: 'Solicitation submitted by Henrique Elias', notes: null, status: null, amountSpent: '0', amountTotal: '0',
     }, {

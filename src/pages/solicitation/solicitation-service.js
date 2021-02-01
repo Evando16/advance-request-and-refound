@@ -64,6 +64,7 @@ function parseTimelineData(data) {
     cardType: item.cardType,
     expenseTypeIcon: item.expenseTypeIcon,
     notes: item.notes,
+    currencyCode: item.currencyCode,
     typeDescription: getTypeDescription(item),
     status: parseToPascalCase(item.status),
     cardDate: parseDate(item.cardDate),
