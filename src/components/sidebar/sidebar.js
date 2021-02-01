@@ -132,7 +132,6 @@ function getStatusStyle(status) {
     case 'PENDING':
     case 'OPEN':
       return { backgroundcolor: '#f0f3f7', color: '#053d4e', border: '1px solid #053d4e' };
-    case 'CANCELLED':
     default:
       return { backgroundcolor: '#fde2e0', color: '#f44336', border: '1px solid #f44336' };
   }
