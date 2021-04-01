@@ -171,7 +171,7 @@ export function getCardIcon(timeLineItem) {
 export default function Timeline({ timelineData }) {
   return (
     timelineData.map((item) => (
-      <TimelineContainier key={item.id}>
+      <TimelineContainier key={item.id} data-testid="solicitation__timeline">
         <TimelineSubContainier>
           <TimelineIdentificationQuadrant width="12%" widthSm="17%">
             <TimelineIcon icon={getCardIcon(item)} {...getIconColor(item.cardType)} />

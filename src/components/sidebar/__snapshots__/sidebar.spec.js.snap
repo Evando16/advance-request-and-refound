@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SidebarComponent Snapshot tests should render sidebar 1`] = `
-"<div class=\\"SidebarContainer-cqrich irOjqx\\">
+"<div data-testid=\\"solicitation__sidebar\\" class=\\"SidebarContainer-cqrich irOjqx\\">
   <div class=\\"SidebarItem-XaPbz gIiPyS\\">
     <div color=\\"#053d4e\\" class=\\"SidebarStatus-dgmLnO fHuHAV\\"><span class=\\"SidebarStatusLabel-hGcnrw ehMEde\\">Status</span><span class=\\"SidebarDescription-jsaGHA gikEwh\\">Open</span></div>
     <div class=\\"SidebarBalance-leGaVI fFtPKT\\"><span class=\\"SidebarBalanceLabel-fVYzkq fGGJxP\\">BALANCE</span><span class=\\"SidebarDescription-jsaGHA gikEwh\\">-</span></div>
@@ -29,7 +29,7 @@ exports[`SidebarComponent Snapshot tests should render sidebar 1`] = `
 `;
 
 exports[`SidebarComponent Snapshot tests should render sidebar with conditional layouts 1`] = `
-"<div class=\\"SidebarContainer-cqrich irOjqx\\">
+"<div data-testid=\\"solicitation__sidebar\\" class=\\"SidebarContainer-cqrich irOjqx\\">
   <div class=\\"SidebarItem-XaPbz gIiPyS\\">
     <div color=\\"#03a046\\" class=\\"SidebarStatus-dgmLnO gA-dDlh\\"><span class=\\"SidebarStatusLabel-hGcnrw ehMEde\\">Status</span><span class=\\"SidebarDescription-jsaGHA gikEwh\\">Approved</span></div>
     <div class=\\"SidebarBalance-leGaVI fFtPKT\\"><span class=\\"SidebarBalanceLabel-fVYzkq fGGJxP\\">BALANCE</span>

@@ -244,7 +244,7 @@ export default function NewExpense({
   };
 
   return (
-    <NewExpenseContainer>
+    <NewExpenseContainer data-testid="new-expense__containier">
       <NewExpenseForm onSubmit={onSubmit}>
         <NewExpenseTitle>New expense</NewExpenseTitle>
         <NewExpenseContent>

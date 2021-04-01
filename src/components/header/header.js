@@ -125,8 +125,8 @@ const Icon = styled(FontAwesomeIcon)`
 
 export default function Header({ headerData }) {
   return (
-    <HeaderContainer>
-      <HeaderTitle>
+    <HeaderContainer data-testid="solicitation__header">
+      <HeaderTitle data-testid="header-title">
         <HeaderTitleItem margin="0 .625rem 0 0">{headerData.type}</HeaderTitleItem>
         <HeaderTitleItem margin="0 .625rem 0 0">-</HeaderTitleItem>
         <HeaderTitleItem margin="0 .625rem 0 0">{headerData.purpose}</HeaderTitleItem>

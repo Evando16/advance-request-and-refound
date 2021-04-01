@@ -99,16 +99,16 @@ export default function Solicitation() {
 
   useEffect(() => {
     requestHeaderData()
-      .then((result) => setHeaderData(result));
-    // .catch((error) => console.log(error.message));
+      .then((result) => setHeaderData(result))
+      // .catch((error) => console.log(error.message));
 
     requestTimelineData()
-      .then((result) => setTimelineData(result));
-    // .catch((error) => console.log(error.message));
+      .then((result) => setTimelineData(result))
+      // .catch((error) => console.log(error.message));
 
     requestSidebarInfo()
-      .then((result) => setSidebarData(result));
-    // .catch((error) => console.log(error.message));
+      .then((result) => setSidebarData(result))
+      // .catch((error) => console.log(error.message));
   }, []);
 
   function toggleNewExpense() {
@@ -129,13 +129,12 @@ export default function Solicitation() {
         {headerData
           && (
             <Header
-              data-testid="solicitation__header"
               headerData={headerData}
               setHeaderData={setHeaderData}
             />
           )}
         <ButtonContainer>
-          <NewExpenseButton type="button" onClick={toggleNewExpense}>
+          <NewExpenseButton type="button" onClick={toggleNewExpense} data-testid="solicitation__new-expense-button">
             <Icon icon={faReceipt} />
             Adicionar Despesa
           </NewExpenseButton>
@@ -152,7 +151,6 @@ export default function Solicitation() {
         {timelineData.length > 0
           && (
             <Timeline
-              data-testid="solicitation__timeline"
               timelineData={timelineData}
             />
           )}
@@ -161,7 +159,6 @@ export default function Solicitation() {
         && (
           <SolicitationSidebar>
             <Sidebar
-              data-testid="solicitation__sidebar"
               sidebarData={sidebarData}
             />
           </SolicitationSidebar>

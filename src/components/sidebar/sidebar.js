@@ -146,7 +146,7 @@ function getStatusStyle(status) {
 
 export default function Sidebar({ sidebarData }) {
   return (
-    <SidebarContainer>
+    <SidebarContainer data-testid="solicitation__sidebar">
       {sidebarData.map((item) => (
         <SidebarItem key={item.id}>
           <SidebarStatus {...getStatusStyle(item.accountabilityStatus)}>

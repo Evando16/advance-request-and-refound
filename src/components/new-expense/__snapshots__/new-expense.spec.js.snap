@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NewExpenseComponent Snapshot tests should render new expense component with conditional fields 1`] = `
-"<div class=\\"NewExpenseContainer-hqtosb juPdFW\\">
+"<div data-testid=\\"new-expense__containier\\" class=\\"NewExpenseContainer-hqtosb juPdFW\\">
   <form class=\\"NewExpenseForm-cwuXvK kEHXvR\\"><span class=\\"NewExpenseTitle-lhcAMw jEIPWO\\">New expense</span>
     <div class=\\"NewExpenseContent-jatTpR kRaxfX\\">
       <div class=\\"NewExpenseFileContainer-bNEBXl cdSBvg\\">
@@ -27,7 +27,7 @@ exports[`NewExpenseComponent Snapshot tests should render new expense component 
 `;
 
 exports[`NewExpenseComponent Snapshot tests should render new expense component without conditional fields 1`] = `
-"<div class=\\"NewExpenseContainer-hqtosb juPdFW\\">
+"<div data-testid=\\"new-expense__containier\\" class=\\"NewExpenseContainer-hqtosb juPdFW\\">
   <form class=\\"NewExpenseForm-cwuXvK kEHXvR\\"><span class=\\"NewExpenseTitle-lhcAMw jEIPWO\\">New expense</span>
     <div class=\\"NewExpenseContent-jatTpR kRaxfX\\">
       <div class=\\"NewExpenseFileContainer-bNEBXl cdSBvg\\">

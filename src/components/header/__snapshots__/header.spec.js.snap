@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HeaderComponent Snapshot tests should render header component 1`] = `
-"<div class=\\"HeaderContainer-hdzII cHvbCS\\">
-  <div class=\\"HeaderTitle-dXnYmT eTNvmf\\"><span class=\\"HeaderTitleItem-jWCFyy gVwxif\\">Refund</span><span class=\\"HeaderTitleItem-jWCFyy gVwxif\\">-</span><span class=\\"HeaderTitleItem-jWCFyy gVwxif\\">Fraternization</span><span class=\\"HeaderTitleItem-jWCFyy fqzkky\\">#756</span></div>
+"<div data-testid=\\"solicitation__header\\" class=\\"HeaderContainer-hdzII cHvbCS\\">
+  <div data-testid=\\"header-title\\" class=\\"HeaderTitle-dXnYmT eTNvmf\\"><span class=\\"HeaderTitleItem-jWCFyy gVwxif\\">Refund</span><span class=\\"HeaderTitleItem-jWCFyy gVwxif\\">-</span><span class=\\"HeaderTitleItem-jWCFyy gVwxif\\">Fraternization</span><span class=\\"HeaderTitleItem-jWCFyy fqzkky\\">#756</span></div>
   <div class=\\"HeaderContent-wIgvW iQpRJy\\">
     <div class=\\"HeaderQuadrant-bWlUIT HeaderQuadrantEventInfo-jIgPfJ vfTuM eNshdq\\">
       <div class=\\"HeaderQuadrantItem-bumUO ilIwqA\\"><span class=\\"HeaderText-hSNebS HeaderLabel-dxGDZV cuKhMX fGgnqt\\">Justification</span><span class=\\"HeaderText-hSNebS HeaderData-cmobAv cuKhMX inCBkQ\\">f</span></div>
@@ -24,8 +24,8 @@ exports[`HeaderComponent Snapshot tests should render header component 1`] = `
 `;
 
 exports[`HeaderComponent Snapshot tests should render header component with conditional fields 1`] = `
-"<div class=\\"HeaderContainer-hdzII cHvbCS\\">
-  <div class=\\"HeaderTitle-dXnYmT eTNvmf\\"><span class=\\"HeaderTitleItem-jWCFyy gVwxif\\">Refund</span><span class=\\"HeaderTitleItem-jWCFyy gVwxif\\">-</span><span class=\\"HeaderTitleItem-jWCFyy gVwxif\\">Fraternization</span><span class=\\"HeaderTitleItem-jWCFyy fqzkky\\">#756</span></div>
+"<div data-testid=\\"solicitation__header\\" class=\\"HeaderContainer-hdzII cHvbCS\\">
+  <div data-testid=\\"header-title\\" class=\\"HeaderTitle-dXnYmT eTNvmf\\"><span class=\\"HeaderTitleItem-jWCFyy gVwxif\\">Refund</span><span class=\\"HeaderTitleItem-jWCFyy gVwxif\\">-</span><span class=\\"HeaderTitleItem-jWCFyy gVwxif\\">Fraternization</span><span class=\\"HeaderTitleItem-jWCFyy fqzkky\\">#756</span></div>
   <div class=\\"HeaderContent-wIgvW iQpRJy\\">
     <div class=\\"HeaderQuadrant-bWlUIT HeaderQuadrantEventInfo-jIgPfJ vfTuM eNshdq\\">
       <div class=\\"HeaderQuadrantItem-bumUO ilIwqA\\"><span class=\\"HeaderText-hSNebS HeaderLabel-dxGDZV cuKhMX fGgnqt\\">Justification</span><span class=\\"HeaderText-hSNebS HeaderData-cmobAv cuKhMX inCBkQ\\">f</span></div>

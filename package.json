@@ -7,7 +7,7 @@
     "start": "npm-run-all build:prod --parallel serve build-watch:prod",
     "start:dev": "npm-run-all build:dev --parallel serve build-watch:dev",
     "test": "jest",
-    "test-coverage": "jest --coverage --watchAll",
+    "test-coverage": "jest --coverage --watchAll --detectOpenHandles",
     "build:prod": "webpack -c ./webpack.prod.js",
     "build:dev": "webpack -c ./webpack.dev.js",
     "build-watch:dev": "webpack -c ./webpack.dev.js -w",
